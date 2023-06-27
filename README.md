@@ -33,7 +33,7 @@
 - Hafsa Aït Ouarraou : https://github.com/hxfsa
 - Jeremy Dohin : https://github.com/Arkantik
 - Vincent Daviaud : https://github.com/Vinchd
-- Roxane Belahcene:
+- Roxane Belahcene: https://github.com/Roxyroke
 
 </br>
 
