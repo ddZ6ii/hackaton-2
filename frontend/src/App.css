@@ -3,27 +3,43 @@
 @tailwind utilities;
 
 /* ______________________________________________________________________ *\
+   Import Local Fonts
+\* ______________________________________________________________________ */
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 600;
+  src: url("../assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 300;
+  src: url("../assets/fonts/Poppins-Light.ttf") format("truetype");
+}
+
+/* ______________________________________________________________________ *\
    Base
 \* ______________________________________________________________________ */
+
 @layer base {
   body {
-    color: theme('colors.neutralDarkest');
-    font-family: theme('fontFamily.sans');
-    font-size: theme('fontSize.base');
+    color: theme("colors.neutralLight");
+    font-family: theme("fontFamily.sans");
+    font-size: theme("fontSize.sm");
   }
 
   section {
   }
 
   h1 {
-    font-size: theme('fontSize.xl');
-    font-family: theme('fontFamily.header');
-    font-weight: theme('fontWeight.extrabold');
+    font-size: theme("fontSize.2xl");
+    font-family: theme("fontFamily.sans");
   }
 
   p {
-    font-size: theme('fontSize.sm');
-    font-family: theme('fontFamily.sans');
+    font-size: theme("fontSize.sm");
+    font-family: theme("fontFamily.sans");
   }
 }
 
@@ -68,8 +84,8 @@
   }
 
   .connect-button {
-    font-family: theme('fontFamily.header');
-    font-size: theme('fontSize.base');
+    font-family: theme("fontFamily.sans");
+    font-size: theme("fontSize.base");
     border-radius: 25px;
     border: transparent;
     background: -webkit-linear-gradient(to bottom, #9969c4, #4e5db6);
