@@ -73,12 +73,12 @@ VALUES
 -- Create phone
 INSERT INTO `phone` (`brand`, `model`, `category`, `price`, `thumbnail_1`, `thumbnail_2`, `thumbnail_3`, `creation_date`, `center_id`) 
 VALUES 
-('Apple', 'iPhone11', '5-Premium', 189.19, './assets/image/iphone-11.jpg', '', '', '2023-06-26', 1),
+('Apple', 'iPhone 11', '5-Premium', 189.19, './assets/image/iphone-11.jpg', '', '', '2023-06-26', 1),
 ('Samsung', 'Galaxy S10', '5-Premium', 209.19, './assets/image/iphone-13.jpg', '', '', '2023-06-28', 3),
-('Apple', 'iPhone14', '5-Premium', 656.19, './assets/image/iphone-14.jpg', '', '', '2023-06-28', 2),
-('Google', 'pixel6', '3-B', 89.25, './assets/image/google-pixel-6a.jpg', '', '', '2023-06-28', 4),
+('Apple', 'iPhone 14', '5-Premium', 656.19, './assets/image/iphone-14.jpg', '', '', '2023-06-28', 2),
+('Google', 'pixel 6', '3-B', 89.25, './assets/image/google-pixel-6a.jpg', '', '', '2023-06-28', 4),
 ('Nokia', '3310', '2-C', 42, './assets/image/iphone-13.jpg', '', '', '2023-02-08', 3),
-('Huawei', 'Huawei Mate50 Pro', '1-HC', 0, './assets/image/huawei-mate-50p.jpg', '', '', '2023-05-24', 1),
+('Huawei', 'Huawei Mate 50 Pro', '1-HC', 0, './assets/image/huawei-mate-50p.jpg', '', '', '2023-05-24', 1),
 ('Xiaomi', 'Redmi Note 10 Pro', '4-A', 169.78, './assets/image/redmi-note-7.webp', '', '', '2023-05-24', 6),
 ('Oppo', 'Reno 7', '2-B', 124, './assets/image/oppo-reno-7.jpg', '', '', '2023-07-12', 1),
 ('Xiaomi', 'Redmi Note 11', '1-HC', 0, './assets/image/redmi-note-11.jpg', '', '', '2023-01-24', 5),
