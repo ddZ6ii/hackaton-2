@@ -1,7 +1,10 @@
+import Tables from "../components/catalogue/Tables";
+
 export default function Catalogue() {
   return (
-    <div>
+    <section>
       <h2>Catalogue</h2>
-    </div>
+      <Tables />
+    </section>
   );
 }
