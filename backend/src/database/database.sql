@@ -74,7 +74,7 @@ VALUES
 -- Create phone
 INSERT INTO `phone` (`brand`, `model`, `category`, `price`, `thumbnail_1`, `thumbnail_2`, `thumbnail_3`, `creation_date`, `center_id`) 
 VALUES 
-('', '', '', '', '', '', '', '')
+('iPhone', 'iPhone10', '5-Premium', 189.19, 'de0aedaf-9ff1-4622-8176-715b8b3f1a5b-iPhone10.jpg', '', '', '')
 
 -- Create phone_feature
 
