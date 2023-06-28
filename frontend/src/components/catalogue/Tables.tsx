@@ -56,6 +56,10 @@ export default function Tables() {
       title: "Catégorie",
       dataIndex: "categorie",
       key: "categorie",
+      filters: [
+        { text: "3-B", value: "3-B" },
+        { text: "5-Premium", value: "5-Premium" },
+      ],
     },
     {
       title: "Prix",
