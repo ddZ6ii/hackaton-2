@@ -4,15 +4,12 @@
  */
 
 import * as phoneModel from '../models/phoneModel.js';
-import phoneRequestHasQuery from '../services/phoneRequestHasQuery.js';
+import handlePhoneQueries from '../services/handlePhoneQueries.js';
 
 const getAllPhones = async (req, res) => {
   try {
     // destructure only if the client request contains a query
-    const [sql, sqlValues] = phoneRequestHasQuery(req.query) || [];
-
-    // console.log(sql);
-    // console.log(sqlValues);
+    const [sql, sqlValues] = handlePhoneQueries(req.query) || [];
 
     const [phones] = await phoneModel.findAll(sql, sqlValues);
 
