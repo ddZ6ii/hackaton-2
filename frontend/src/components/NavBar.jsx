@@ -26,11 +26,19 @@ export default function NavBar() {
           <NavLink to='/' className='mr-5 hover:text-primaryLight'>
             Home
           </NavLink>
+<<<<<<< Updated upstream
           <NavLink to='contact' className='mr-5 hover:text-primaryLight'>
             Contact
           </NavLink>
           <NavLink to='about' className='mr-5 hover:text-primaryLight'>
             About
+=======
+          <NavLink to="catalogue" className="mr-5 hover:text-primary">
+            Catalogue
+          </NavLink>
+          <NavLink to="faq" className="mr-5 hover:text-primary">
+            FAQ
+>>>>>>> Stashed changes
           </NavLink>
 
           <NavLink to='account'>
