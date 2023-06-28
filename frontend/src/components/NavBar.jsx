@@ -25,13 +25,12 @@ export default function NavBar() {
           <NavLink to="/" className="mr-5 hover:text-primary">
             Accueil
           </NavLink>
-          <NavLink to="contact" className="mr-5 hover:text-primary">
+          <NavLink to="catalogue" className="mr-5 hover:text-primary">
             Catalogue
           </NavLink>
-          <NavLink to="about" className="mr-5 hover:text-primary">
+          <NavLink to="faq" className="mr-5 hover:text-primary">
             FAQ
           </NavLink>
-
           <NavLink to="account">
             <button className="inline-flex items-center rounded border-0 bg-primary px-3 py-1 text-sm text-neutralLight hover:bg-primary/75 focus:outline-none md:mt-0">
               Se connecter

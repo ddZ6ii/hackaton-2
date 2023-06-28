@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Accueil from "./pages/Accueil";
 import Catalogue from "./pages/Catalogue";
+import Faq from "./pages/Faq";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/accueil" element={<Accueil />} />
           <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/faq" element={<Faq />} />
           <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
