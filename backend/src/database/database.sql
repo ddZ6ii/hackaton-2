@@ -1,8 +1,8 @@
--- CREATE TABLES
+-- ___________________________________ CREATE TABLES ___________________________________ 
 DROP TABLE IF EXISTS `center`;
 CREATE TABLE `center` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
+  `city` VARCHAR(100) NOT NULL,
   `region` VARCHAR(100) NOT NULL,
   `ZIP` INT NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
@@ -52,3 +52,34 @@ CREATE TABLE `phone_feature` (
 	`feature_id` INT NULL,
   CONSTRAINT fk_feature_phone FOREIGN KEY (`feature_id`) REFERENCES `feature`(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+-- ___________________________________ POPULATE TABLES ___________________________________ 
+
+-- Create user
+INSERT INTO `user` (`email`, `password`, `is_admin`) 
+VALUES 
+('admin@gmail.com', 'admin', 'true'),
+('user@gmail.com', 'user', 'false');
+
+-- Create center
+INSERT INTO `center` (`city`, `region`, `ZIP`) 
+VALUES 
+('Grenoble', 'Auvergne-Rhone-Alpes', 38000),
+('Lyon', 'Auvergne-Rhone-Alpes', 69008),
+('Paris', 'Ile-de-France', 75013),
+('Strasbourg', 'Grand Est', 67000),
+('Bordeaux', 'Nouvelle-Aquitaine', 33800),
+('Marseille', "Provence-Alpes-Cote d'Azur", 13001);
+
+-- Create phone
+INSERT INTO `phone` (`brand`, `model`, `category`, `price`, `thumbnail_1`, `thumbnail_2`, `thumbnail_3`, `creation_date`, `center_id`) 
+VALUES 
+('', '', '', '', '', '', '', '')
+
+-- Create phone_feature
+
+
+-- Create feature
+INSERT INTO `feature` (`has_charger`, `state`, `OS`, `RAM`, `storage`, `color`, `screen`, `network`) 
+VALUES 
+('', '', '', '', '', '', '', '')
