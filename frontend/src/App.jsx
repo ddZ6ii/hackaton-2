@@ -10,7 +10,6 @@ import NotFound from "./pages/NotFound";
 // Components
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import Catalogue from "./pages/Catalogue";
 
 export default function App() {
   return (
