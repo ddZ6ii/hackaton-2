@@ -1,11 +1,9 @@
 import express from 'express';
-
-import homeRouter from './homeRouter.js';
-import phoneRouter from './phoneRouter.js';
+import * as phoneController from '../controllers/phoneController.js';
 
 const router = express.Router();
 
-router.use('/', homeRouter);
-router.use('/smartphones', phoneRouter);
+router.get('/smartphones', phoneController.getAllPhones);
+router.get('/smartphones/:id', phoneController.getPhone);
 
 export default router;
