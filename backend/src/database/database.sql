@@ -1,8 +1,3 @@
--- CREATE DATABASE
-DROP DATABASE IF EXISTS `emmaus_connect`;
-CREATE DATABASE `emmaus_connect`;
-USE `emmaus_connect`;
-
 -- CREATE TABLES
 DROP TABLE IF EXISTS `center`;
 CREATE TABLE `center` (
