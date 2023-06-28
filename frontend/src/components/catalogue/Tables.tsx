@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Table, ConfigProvider } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
-import type { SorterResult } from "antd/es/table/interface";
+import type { FilterValue, SorterResult } from "antd/es/table/interface";
 import qs from "qs";
 
 export default function Tables() {
-  const [data, setData] = useState<DataType[]>();
+  const [data, setData] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [tableParams, setTableParams] = useState<TableParams>({
     pagination: {
@@ -23,7 +23,9 @@ export default function Tables() {
 
   interface TableParams {
     pagination?: TablePaginationConfig;
+    sortField?: string;
     sortOrder?: string;
+    filters?: Record<string, FilterValue>;
   }
 
   const columns: ColumnsType<DataType> = [
@@ -36,11 +38,19 @@ export default function Tables() {
       title: "Marque",
       dataIndex: "marque",
       key: "marque",
+      filters: [
+        { text: "Apple", value: "Apple" },
+        { text: "Samsung", value: "Samsung" },
+      ],
     },
     {
       title: "Modèle",
       dataIndex: "modele",
       key: "modele",
+      filters: [
+        { text: "iPhone11", value: "iPhone11" },
+        { text: "Galaxy S10", value: "Galaxy S10" },
+      ],
     },
     {
       title: "Catégorie",
@@ -87,7 +97,7 @@ export default function Tables() {
           pagination: {
             ...tableParams.pagination,
             total: 100,
-            // total you should be based from database
+            // total should be based on database
             // total: data.totalCount,
           },
         });
@@ -100,10 +110,12 @@ export default function Tables() {
 
   const handleTableChange = (
     pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue>,
     sorter: SorterResult<DataType>
   ) => {
     setTableParams({
       pagination,
+      filters,
       ...sorter,
     });
 
@@ -121,6 +133,7 @@ export default function Tables() {
           colorTextHeading: "#002743",
           colorText: "#00ACB0",
           colorBorderSecondary: "#EBEBEB",
+          colorFillSecondary: "#EBEBEB",
           fontSize: 16,
         },
       }}
@@ -128,7 +141,10 @@ export default function Tables() {
       <Table
         columns={columns}
         dataSource={data}
-        pagination={tableParams.pagination}
+        pagination={{
+          position: ["bottomCenter"],
+          ...tableParams.pagination,
+        }}
         loading={loading}
         onChange={handleTableChange}
       />
