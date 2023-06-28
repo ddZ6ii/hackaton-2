@@ -4,9 +4,8 @@ export default function DropdownLi({ item }) {
     <li>
       <div className="flex items-center rounded pl-2 hover:bg-gray-100">
         <input
-          id={`checkbox-item-${item.id}`}
           type="checkbox"
-          value="true"
+          defaultChecked=""
           className="h-4 w-4 rounded border-neutral bg-gray-100 text-primary focus:outline-none"
         />
         <label
