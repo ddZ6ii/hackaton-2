@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id_user` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `is_admin` BOOL NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
@@ -13,9 +13,9 @@ CREATE TABLE `phone` (
   `brand` VARCHAR(50) NOT NULL,
   `creation_date` DATE NOT NULL,
   `model` VARCHAR(50) NOT NULL,
-  `thumbnail_1` VARCHAR(100) NULL,
-  `thumbnail_2` VARCHAR(100) NULL,
-  `thumbnail_3` VARCHAR(100) NULL
+  `thumbnail_1` VARCHAR(255) NULL,
+  `thumbnail_2` VARCHAR(255) NULL,
+  `thumbnail_3` VARCHAR(255) NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `feature`;
@@ -23,15 +23,15 @@ CREATE TABLE `feature` (
   `id_feature` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `category` VARCHAR(50) NOT NULL,
 	`color` VARCHAR(20) NULL,
-  `has_charger` BOOL NULL,
+  `has_charger` BOOL NOT NULL,
   `network` VARCHAR(20) NULL,
   `OS` VARCHAR(50) NULL,
   `price` DECIMAL(10,2) NOT NULL,
-  `RAM` INT NULL,
+  `RAM` INT NOT NULL,
   `screen` DECIMAL(10,2) NULL,
-  `state` VARCHAR(50) NULL,
-  `storage` INT NULL,
-  `phone_id` INT NULL,
+  `state` VARCHAR(50) NOT NULL,
+  `storage` INT NOT NULL,
+  `phone_id` INT NOT NULL,
   CONSTRAINT fk_feature_phone FOREIGN KEY (`phone_id`) 
     REFERENCES `phone`(`id_phone`)
     ON DELETE CASCADE
@@ -41,8 +41,10 @@ CREATE TABLE `feature` (
 -- Create user
 INSERT INTO `user` (`email`, `password`, `is_admin`) 
 VALUES 
-('admin@gmail.com', 'admin', 1),
-('user@gmail.com', 'user', 0);
+('admin@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$mkm5zcvh7mTtDGu0UsOZxw$bcLPeyJqaJGN4mX2aILxsnbeCszJrBJUJDjEXewSrE8', 1),
+('user@gmail.com', '$argon2id$v=19$m=19893.36898592844,t=2,p=1$+RUYi4CW31MZnxxRBO9Alw$u0TJVC8gPPUeb/bj/1sjeexnbnIBYP7aLk2ydKm2odU', 0);
+-- ('admin@gmail.com', 'admin', 1),
+-- ('user@gmail.com', 'user', 0);
 
 -- Create phone
 INSERT INTO `phone` (`brand`, `creation_date`, `model`, `thumbnail_1`, `thumbnail_2`, `thumbnail_3`) 

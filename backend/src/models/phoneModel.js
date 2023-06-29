@@ -33,6 +33,8 @@ const addPhone = (body) => {
 };
 
 const addFeature = (body, idPhone) => {
+  console.log(idPhone);
+
   return database.query(
     'INSERT INTO feature (`category`, `color`, `has_charger`, `network`, `OS`, `price`, `RAM`, `screen`, `state`, `storage`, `phone_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [
@@ -46,7 +48,6 @@ const addFeature = (body, idPhone) => {
       body.screen,
       body.state,
       body.storage,
-      body.phone_id,
       idPhone,
     ]
   );

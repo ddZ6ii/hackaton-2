@@ -1,22 +1,19 @@
 /**
- * @desc middleware for checking user already exists in the database, and if so, pass along user credentials to the next middleware
- * hash user password using argon2 prior writing to database
+ * @desc middleware for checking if user already exists in the database prior adding it
  */
 
 import * as userModel from '../../models/userModel.js';
 
-const getUserByEmailWithPasswordAndPassToNext = async (req, res, next) => {
+const addOnlyIfNotAlreadyExists = async (req, res, next) => {
   if (!Object.keys(req.body).length)
     return res.status(400).send('bad request: empty body');
 
   try {
     const [[user]] = await userModel.findByMail(req.body.email);
-    if (!user)
+    if (user)
       return res
-        .status(401)
-        .send(
-          'aucun compte utilisateur enregistré! veuillez vérifier votre email'
-        );
+        .status(409)
+        .send('email déja existant dans la base de données!');
     req.user = user;
     next();
   } catch (err) {
@@ -29,4 +26,4 @@ const getUserByEmailWithPasswordAndPassToNext = async (req, res, next) => {
   }
 };
 
-export default getUserByEmailWithPasswordAndPassToNext;
+export default addOnlyIfNotAlreadyExists;
