@@ -6,6 +6,8 @@ import Accueil from "./pages/Accueil";
 import Catalogue from "./pages/Catalogue";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
+import PhoneDetails from "./pages/PhoneDetails";
+
 
 // Components
 import NavBar from "./components/NavBar";
@@ -21,6 +23,7 @@ export default function App() {
           <Route path="/accueil" element={<Accueil />} />
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/phones/:id" element={<PhoneDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
