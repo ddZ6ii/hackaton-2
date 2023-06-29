@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Table, ConfigProvider } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
-import qs from "qs";
 import axios from "axios";
 
 export default function Tables() {
@@ -72,6 +71,7 @@ export default function Tables() {
       dataIndex: "price",
       key: "price",
       sorter: (a, b) => a.price - b.price,
+      render: (price) => <>{price} €</>,
     },
     {
       title: "Ajouté le",
