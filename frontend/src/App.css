@@ -299,3 +299,7 @@
 .ant-table-filter-dropdown-btns button:nth-of-type(2) {
   background: theme("colors.primary");
 }
+
+.chevron-icon:hover {
+  background-color:  #00ACB0;
+}
