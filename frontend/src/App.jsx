@@ -16,7 +16,7 @@ export default function App() {
   return (
     <>
       <NavBar />
-      <main className="min-h-[calc(100dvh-100px)] pt-10 md:min-h-[calc(100dvh-40px)] md:pt-20">
+      <main className="min-h-[calc(100dvh-45px)] pt-24 md:min-h-[calc(100vh-134px)] md:pt-0">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/accueil" element={<Accueil />} />
