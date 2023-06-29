@@ -2,7 +2,7 @@
  * @desc automated method for server-side data validation (prior to database entry)
  * here the Joi package is used (express-validator is an alternative)
  */
-import Joi from 'joi';
+import Joi from "joi";
 
 const phoneSchema = Joi.object({
   brand: Joi.string().max(50).required(),
