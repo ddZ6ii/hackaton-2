@@ -15,15 +15,17 @@ function chainOrConditions(accumulator, values, field) {
 }
 
 function formatRequest(filters, req) {
-  return filters.reduce((acc, { field, values, operator }, index) => {
+  return filters.reduce((acc, { field, value, operator }, index) => {
     acc += index === 0 ? ' WHERE' : ' AND';
 
     // check if query filter (object) contains multiple values (array)
-    const hasMultipleValues = Array.isArray(values) && values.length > 1;
+    const hasMultipleValues = Array.isArray(value) && value.length > 1;
+
     if (hasMultipleValues) {
-      chainOrConditions(acc, values, field);
+      acc = chainOrConditions(acc, value, field);
+    } else {
+      acc += ` ${field} ${operator} ?`;
     }
-    acc += ` ${field} ${operator} ?`;
     return acc;
   }, req);
 }
@@ -31,7 +33,9 @@ function formatRequest(filters, req) {
 function handlePhoneQueries(query) {
   if (!Object.keys(query).length) return;
 
-  let sqlRequest = 'SELECT * FROM `phone`';
+  let sqlRequest =
+    'SELECT * FROM phone LEFT JOIN feature ON feature.phone_id = phone.id_phone';
+
   const queryFilters = [];
 
   // check for query strings (filters)

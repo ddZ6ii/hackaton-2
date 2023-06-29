@@ -1,7 +1,7 @@
 -- ___________________________________ CREATE TABLES ___________________________________ 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_user` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `is_admin` BOOL NOT NULL
@@ -9,7 +9,7 @@ CREATE TABLE `user` (
 
 DROP TABLE IF EXISTS `phone`;
 CREATE TABLE `phone` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_phone` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `brand` VARCHAR(50) NOT NULL,
   `creation_date` DATE NOT NULL,
   `model` VARCHAR(50) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `phone` (
 
 DROP TABLE IF EXISTS `feature`;
 CREATE TABLE `feature` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_feature` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `category` VARCHAR(50) NOT NULL,
 	`color` VARCHAR(20) NULL,
   `has_charger` BOOL NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `feature` (
   `storage` INT NULL,
   `phone_id` INT NULL,
   CONSTRAINT fk_feature_phone FOREIGN KEY (`phone_id`) 
-    REFERENCES `phone`(`id`)
+    REFERENCES `phone`(`id_phone`)
     ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
@@ -61,13 +61,13 @@ VALUES
 -- Create feature
 INSERT INTO `feature` (`category`, `color`, `has_charger`, `network`, `OS`, `price`, `RAM`, `screen`, `state`, `storage`, `phone_id`) 
 VALUES 
-('5-Premium', 'argent', 1, '4G', 'iOS', 189.19, 2, '5.8', 'RECONDITIONNE', 32, 1),
-('5-Premium', 'noir', 0, '4G', 'Android', 209.19, 6, '6.1', 'RECONDITIONNE', 64, 2),
-('5-Premium', 'argent', 1, '4G', 'iOS', 656.19, 8, '5.8', 'RECONDITIONNABLE', 128, 3),
-('1-HC', 'argent', 0, '4G', 'iOS', 89.25, 6, '5.8', 'BLOQUE', 16, 4),
-('2-B', 'noir', 1, '4G', 'iOS', 169.78, 4, '5.8', 'REPARABLE', 32, 5),
-('2-B', 'argent', 0, '4G', 'iOS', 124, 6, '5.8', 'DEEE', 64, 6),
-('1-HC','noir', 1, '4G', 'iOS', 109, 8, '5.8', 'BLOQUE', 64,  7),
-('1-HC', 'argent', 0, '4G', 'iOS', 89.88, 4, '5.8', 'DEEE', 32, 8),
-('1-HC', 'noir', 1, '4G', 'android', 77, 4, '5.8','DEEE', 32, 9),
-('1-HC', 'argent', 0, '4G', 'iOS', 124.94, 6, '5.8', 'DEEE', 32, 10)
+('5-Premium', 'argent', 1, '4G', 'iOS', 189.19, 2, 5.8, 'RECONDITIONNE', 32, 1),
+('5-Premium', 'noir', 0, '4G', 'Android', 209.19, 6, 6.1, 'RECONDITIONNE', 64, 2),
+('5-Premium', 'argent', 1, '4G', 'iOS', 656.19, 8, 5.8, 'RECONDITIONNABLE', 128, 3),
+('1-HC', 'argent', 0, '4G', 'iOS', 89.25, 6, 5.8, 'BLOQUE', 16, 4),
+('2-B', 'noir', 1, '4G', 'iOS', 169.78, 4, 5.8, 'REPARABLE', 32, 5),
+('2-B', 'argent', 0, '4G', 'iOS', 124, 6, 5.8, 'DEEE', 64, 6),
+('1-HC','noir', 1, '4G', 'iOS', 109, 8, 5.8, 'BLOQUE', 64,  7),
+('1-HC', 'argent', 0, '4G', 'iOS', 89.88, 4, 5.8, 'DEEE', 32, 8),
+('1-HC', 'noir', 1, '4G', 'android', 77, 4, 5.8,'DEEE', 32, 9),
+('1-HC', 'argent', 0, '4G', 'iOS', 124.94, 6, 5.8, 'DEEE', 32, 10)

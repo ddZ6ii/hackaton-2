@@ -6,7 +6,7 @@
 import * as phoneModel from '../models/phoneModel.js';
 import handlePhoneQueries from '../services/handlePhoneQueries.js';
 
-const getAllPhones = async (req, res) => {
+const getPhones = async (req, res) => {
   try {
     // destructure only if the client request contains a query
     const [sql, sqlValues] = handlePhoneQueries(req.query) || [];
@@ -33,16 +33,77 @@ const getPhone = async (req, res) => {
     if (!phone)
       return res
         .status(400)
-        .send(`téléphone avec id ${req.params.id} non trouvé !`);
+        .send(`téléphone avec id ${req.params.id} non trouvé!`);
     res.json(phone);
   } catch (err) {
     console.error(err);
     res
       .status(500)
       .send(
-        'une erreur est survenue en récupérant le téléphone depuis la base de données'
+        'une erreur est survenue en récupérant le téléphone depuis la base de données...'
       );
   }
 };
 
-export { getAllPhones, getPhone };
+const deletePhone = async (req, res) => {
+  try {
+    const [result] = await phoneModel.remove(req.params.id);
+    // id not found or invalid
+    if (result.affectedRows === 0) {
+      return res.status(404).send(`téléphone ${req.params.id} non trouvé!`);
+    }
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send(
+        'une erreur est survenue en tentant de supprimer le téléphone de la base de données...'
+      );
+  }
+};
+
+const postPhone = async (req, res) => {
+  try {
+    const [phone] = await phoneModel.addPhone(req.body);
+    if (phone.affectedRows === 0) {
+      return res.status(404).send(`requete non valide!`);
+    }
+
+    const [feature] = await phoneModel.addFeature(req.body, phone.insertId);
+    if (feature.affectedRows === 0) {
+      return res.status(404).send(`requete non valide!`);
+    }
+
+    // returns both the status and a location header with link to /api/movies/{id} containing new ID
+    res.location(`${req.route.path}/${phone.insertId}`).sendStatus(201);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send(
+        'une erreur est survenue en ajoutant le téléphone dans la base de données'
+      );
+  }
+};
+
+const postFeature = async (req, res) => {
+  try {
+    console.log(req.body);
+    const [phone] = await phoneModel.postPhone(req.body);
+    if (phone.affectedRows === 0) {
+      return res.status(404).send(`requete non valide!`);
+    }
+    // returns both the status and a location header with link to /api/movies/{id} containing new ID
+    res.location(`${req.route.path}/${phone.insertId}`).sendStatus(201);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send(
+        'une erreur est survenue en ajoutant le téléphone dans la base de données'
+      );
+  }
+};
+
+export { getPhones, getPhone, deletePhone, postPhone, postFeature };
