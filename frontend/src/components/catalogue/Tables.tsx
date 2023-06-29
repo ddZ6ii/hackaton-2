@@ -20,6 +20,7 @@ export default function Tables() {
       pageSize: 5,
     },
   });
+  const [isMobile, setIsMobile] = useState(false);
 
   /**
    * Constants
@@ -181,6 +182,19 @@ export default function Tables() {
     fetchData(`${API}`);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="rounded-lg shadow-md">
       <ConfigProvider
@@ -205,6 +219,7 @@ export default function Tables() {
           loading={loading}
           onChange={handleTableChange}
           rowKey={(record) => record.id_phone}
+          tableLayout={isMobile ? "auto" : "fixed"}
         />
       </ConfigProvider>
     </div>
