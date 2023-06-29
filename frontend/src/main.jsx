@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 
 // Component
 import App from './App';
-import { UserProvider } from './contexts/userContex';
+import { UserProvider } from './contexts/UserContext';
 
 // Style
 import './App.css';
