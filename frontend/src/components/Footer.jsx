@@ -7,7 +7,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="flex flex-col items-center justify-center gap-3 bg-primary px-6 py-3 text-neutralLight md:h-20 md:flex-row md:justify-between md:px-12 md:py-4">
+    <footer className="flex flex-col items-center justify-center gap-3 bg-primary px-6 py-3 text-neutralLight md:h-10 md:flex-row md:justify-between md:px-12 md:py-4">
       <p className="text-xs md:text-sm">
         &copy; {currentYear} Emmaus Connect. All rights reserved
       </p>
