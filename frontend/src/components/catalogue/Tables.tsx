@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
+
 import { Table, ConfigProvider } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
-import axios from "axios";
+import { EyeOutlined } from "@ant-design/icons";
 
 export default function Tables() {
   const [data, setData] = useState<DataType[]>([]);
@@ -15,15 +18,12 @@ export default function Tables() {
   });
 
   interface DataType {
+    id: number;
     brand: string;
     model: string;
     category: string;
     price: number;
-    thumbnail_1: string;
-    thumbnail_2: string;
-    thumbnail_3: string;
     creation_date: string;
-    center_id: number;
   }
 
   interface TableParams {
@@ -34,11 +34,6 @@ export default function Tables() {
   }
 
   const columns: ColumnsType<DataType> = [
-    {
-      title: "",
-      dataIndex: "photo",
-      key: "photo",
-    },
     {
       title: "Marque",
       dataIndex: "brand",
@@ -77,6 +72,11 @@ export default function Tables() {
       title: "Ajouté le",
       dataIndex: "creation_date",
       key: "creation_date",
+      sorter: (a, b) => {
+        const dateA = new Date(a.creation_date);
+        const dateB = new Date(b.creation_date);
+        return dateA.getTime() - dateB.getTime();
+      },
       render: (creation_date) => {
         const date = new Date(creation_date);
         return date.toLocaleDateString();
@@ -86,6 +86,11 @@ export default function Tables() {
       title: "",
       dataIndex: "voir",
       key: "voir",
+      render: (_, record) => (
+        <NavLink to={`/product/${record.id}`}>
+          <EyeOutlined />
+        </NavLink>
+      ),
     },
   ];
 
@@ -141,7 +146,7 @@ export default function Tables() {
   };
 
   return (
-    <div className="rounded-lg shadow-md">
+    <div className="w-full rounded-lg shadow-md">
       <ConfigProvider
         theme={{
           token: {
