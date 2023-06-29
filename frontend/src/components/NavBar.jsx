@@ -25,9 +25,6 @@ export default function NavBar() {
           <NavLink to="accueil" className="mr-5 hover:text-primary">
             Accueil
           </NavLink>
-          <NavLink to="catalogue" className="mr-5 hover:text-primary">
-            Catalogue
-          </NavLink>
           <NavLink to="faq" className="mr-5 hover:text-primary">
             FAQ
           </NavLink>
@@ -69,13 +66,6 @@ export default function NavBar() {
             className={`text-center text-neutralLight`}
           >
             Accueil
-          </NavLink>
-          <NavLink
-            to="catalogue"
-            onClick={handleClickLink}
-            className={`text-center text-neutralLight`}
-          >
-            Catalogue
           </NavLink>
           <NavLink
             to="faq"
