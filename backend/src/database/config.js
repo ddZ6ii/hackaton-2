@@ -19,7 +19,7 @@ const database = mysql.createPool({
 database
   .getConnection()
   .then(() => {
-    console.log('connection to database established!');
+    console.log(`connected to database on port ${DB_PORT}`);
   })
   .catch((err) => {
     console.error(err);

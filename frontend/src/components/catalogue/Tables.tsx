@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table, ConfigProvider } from "antd";
+import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
+import type { FilterValue, SorterResult } from "antd/es/table/interface";
+import axios from "axios";
 
 export default function Tables() {
-  const columns = [
+  const [data, setData] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [tableParams, setTableParams] = useState<TableParams>({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+    },
+  });
+
+  interface DataType {
+    brand: string;
+    model: string;
+    category: string;
+    price: number;
+    thumbnail_1: string;
+    thumbnail_2: string;
+    thumbnail_3: string;
+    creation_date: string;
+    center_id: number;
+  }
+
+  interface TableParams {
+    pagination?: TablePaginationConfig;
+    sortField?: string;
+    sortOrder?: string;
+    filters?: Record<string, FilterValue>;
+  }
+
+  const columns: ColumnsType<DataType> = [
     {
       title: "",
       dataIndex: "photo",
@@ -10,29 +41,46 @@ export default function Tables() {
     },
     {
       title: "Marque",
-      dataIndex: "marque",
-      key: "marque",
+      dataIndex: "brand",
+      key: "brand",
+      filters: [
+        { text: "Apple", value: "Apple" },
+        { text: "Samsung", value: "Samsung" },
+      ],
     },
     {
       title: "Modèle",
-      dataIndex: "modele",
-      key: "modele",
+      dataIndex: "model",
+      key: "model",
+      filters: [
+        { text: "iPhone11", value: "iPhone11" },
+        { text: "Galaxy S10", value: "Galaxy S10" },
+      ],
     },
     {
       title: "Catégorie",
-      dataIndex: "categorie",
-      key: "categorie",
+      dataIndex: "category",
+      key: "category",
+      filters: [
+        { text: "3-B", value: "3-B" },
+        { text: "5-Premium", value: "5-Premium" },
+      ],
     },
     {
       title: "Prix",
-      dataIndex: "prix",
-      key: "prix",
-      sorter: (a, b) => a.prix - b.prix,
+      dataIndex: "price",
+      key: "price",
+      sorter: (a, b) => a.price - b.price,
+      render: (price) => <>{price} €</>,
     },
     {
       title: "Ajouté le",
-      dataIndex: "ajout",
-      key: "ajout",
+      dataIndex: "creation_date",
+      key: "creation_date",
+      render: (creation_date) => {
+        const date = new Date(creation_date);
+        return date.toLocaleDateString();
+      },
     },
     {
       title: "",
@@ -41,31 +89,59 @@ export default function Tables() {
     },
   ];
 
-  const dataSource = [
-    {
-      key: "1",
-      photo: "Iphone picture",
-      marque: "Iphone",
-      modele: "Iphone 10",
-      categorie: "3-B",
-      prix: 142,
-      ajout: "28/06/23",
-      voir: "",
-    },
-    {
-      key: "2",
-      photo: "Samsung picture",
-      marque: "Samsung",
-      modele: "Galaxy s22",
-      categorie: "2-C",
-      prix: 242,
-      ajout: "28/06/23",
-      voir: "",
-    },
-  ];
+  const getApiParams = (params: TableParams) => ({
+    results: params.pagination?.pageSize,
+    page: params.pagination?.current,
+    ...params,
+  });
+
+  const fetchData = () => {
+    setLoading(true);
+    const apiUrl = `http://localhost:5000/smartphones?${getApiParams(
+      tableParams
+    )}`;
+    axios
+      .get(apiUrl)
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+        setTableParams({
+          ...tableParams,
+          pagination: {
+            ...tableParams.pagination,
+            total: res.data.totalCount,
+          },
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [JSON.stringify(tableParams)]);
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue>,
+    sorter: SorterResult<DataType>
+  ) => {
+    setTableParams({
+      pagination,
+      filters,
+      ...sorter,
+    });
+
+    // `dataSource` is useless since `pageSize` changed
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      setData([]);
+    }
+  };
 
   return (
-    <div className="rounded-lg shadow">
+    <div className="rounded-lg shadow-md">
       <ConfigProvider
         theme={{
           token: {
@@ -73,16 +149,20 @@ export default function Tables() {
             colorTextHeading: "#002743",
             colorText: "#00ACB0",
             colorBorderSecondary: "#EBEBEB",
+            colorFillSecondary: "#EBEBEB",
             fontSize: 16,
           },
         }}
       >
         <Table
+          columns={columns}
+          dataSource={data}
           pagination={{
             position: ["bottomCenter"],
+            ...tableParams.pagination,
           }}
-          columns={columns}
-          dataSource={dataSource}
+          loading={loading}
+          onChange={handleTableChange}
         />
       </ConfigProvider>
     </div>

@@ -144,9 +144,9 @@
   .connect-ghostButton {
     @extend .connect-button;
     background: none;
-    border: 1px solid #ffffff;
+    border: 1px solid theme("colors.primary");
     &:hover {
-      background-color: rgba(245, 245, 245, 0.3);
+      background-color: rgba(0, 172, 176, 0.1);
     }
   }
 
@@ -170,9 +170,9 @@
   }
 
   .overlay {
-    background: #ff416c;
-    background: -webkit-linear-gradient(to right, #9969c4, #4e5db6);
-    background: linear-gradient(to right, #9969c4, #4e5db6);
+    background: theme("colors.primary");
+    background: -webkit-linear-gradient(to bottom, #f9f9f9, #f9f9f9, #00acb0);
+    background: linear-gradient(to bottom, #f9f9f9, #f9f9f9, #00acb0);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -234,4 +234,68 @@
     }
   }
   /* End Connect component  */
+}
+
+@layer utilities {
+  /* BugerMenu */
+  .burger {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  nav label span {
+    background: theme("colors.default");
+    border-radius: 10px;
+    height: 7px;
+    margin: 4px 0;
+    transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+
+  .burgerline:nth-of-type(1) {
+    width: 50%;
+  }
+
+  .burgerline:nth-of-type(2) {
+    width: 100%;
+  }
+
+  .burgerline:nth-of-type(3) {
+    width: 75%;
+  }
+
+  nav input[type="checkbox"] {
+    display: none;
+  }
+
+  nav input[type="checkbox"]:checked ~ span:nth-of-type(1) {
+    transform-origin: bottom;
+    transform: rotatez(45deg) translate(6px, 0px);
+  }
+
+  nav input[type="checkbox"]:checked ~ span:nth-of-type(2) {
+    transform-origin: top;
+    transform: rotatez(-45deg);
+  }
+
+  nav input[type="checkbox"]:checked ~ span:nth-of-type(3) {
+    transform-origin: bottom;
+    width: 50%;
+    transform: translate(18px, -9px) rotatez(45deg);
+  }
+
+  .menu {
+    transition: transform 0.4s ease-out;
+    z-index: 5;
+  }
+
+  .active {
+    transform: translate(0);
+  }
+}
+
+.ant-table-filter-dropdown-btns button:nth-of-type(2) {
+  background: theme("colors.primary");
 }
