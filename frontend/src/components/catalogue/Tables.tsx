@@ -68,6 +68,11 @@ export default function Tables() {
       title: "Ajouté le",
       dataIndex: "creation_date",
       key: "creation_date",
+      sorter: (a, b) => {
+        const dateA = new Date(a.creation_date);
+        const dateB = new Date(b.creation_date);
+        return dateA.getTime() - dateB.getTime();
+      },
       render: (creation_date) => {
         const date = new Date(creation_date);
         return date.toLocaleDateString();
