@@ -22,7 +22,7 @@ export default function NavBar() {
         </NavLink>
 
         <div className="hidden items-center text-base md:flex">
-          <NavLink to="/" className="mr-5 hover:text-primary">
+          <NavLink to="accueil" className="mr-5 hover:text-primary">
             Accueil
           </NavLink>
           <NavLink to="catalogue" className="mr-5 hover:text-primary">
@@ -64,28 +64,28 @@ export default function NavBar() {
           className={`menu absolute right-0 top-[0px] z-20 flex w-[140px] translate-y-[-150%] flex-col rounded-bl-md py-20 sm:hidden ${active} items-center gap-5 bg-primary`}
         >
           <NavLink
-            to="/accueil"
+            to="accueil"
             onClick={handleClickLink}
             className={`text-center text-neutralLight`}
           >
             Accueil
           </NavLink>
           <NavLink
-            to="/catalogue"
+            to="catalogue"
             onClick={handleClickLink}
             className={`text-center text-neutralLight`}
           >
             Catalogue
           </NavLink>
           <NavLink
-            to="/faq"
+            to="faq"
             onClick={handleClickLink}
             className={`text-center text-neutralLight`}
           >
             FAQ
           </NavLink>
           <NavLink
-            to="/account"
+            to="account"
             onClick={handleClickLink}
             className={`text-center text-neutralLight`}
           >
