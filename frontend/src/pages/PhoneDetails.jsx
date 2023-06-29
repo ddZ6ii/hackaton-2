@@ -76,7 +76,7 @@ export default function PhoneDetails() {
         <div className={`${styles.chevron_icon} absolute left-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block`}>
           <BsChevronCompactLeft onClick={prevSlide} size={30} />
         </div>
-        <div className="chevron-icon absolute right-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block">
+        <div className={`${styles.chevron_icon} absolute right-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block`}>
           <BsChevronCompactRight onClick={nextSlide} size={30} />
         </div>
         <div className="top-4 flex justify-center py-2">
