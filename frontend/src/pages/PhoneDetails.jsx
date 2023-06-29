@@ -5,7 +5,7 @@ import axios from "axios";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 
-import styles from "../css/PhoneDetails.module.css"
+import styles from "../css/PhoneDetails.module.css";
 
 export default function PhoneDetails() {
   const [phone, setPhone] = useState({});
@@ -13,12 +13,11 @@ export default function PhoneDetails() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/smartphones/").then((res) => {
-      const phones = res.data;
-      const filteredPhone = phones.filter((phone) => phone.id_phone == id);
-      console.log(filteredPhone[0]);
-      setPhone(filteredPhone[0]);
-    });
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/smartphones/${id}`)
+      .then((res) => {
+        setPhone(res.data);
+      });
   }, []);
 
   const prevSlide = () => {
@@ -52,7 +51,9 @@ export default function PhoneDetails() {
   ];
 
   return (
-    <section className={`${styles.phone_details_container} sm:flex sm:flex-row justify-center items-center`}>
+    <section
+      className={`${styles.phone_details_container} items-center justify-center sm:flex sm:flex-row`}
+    >
       <div>
         <h2 className="mb-4 mt-12 text-center">
           {phone.brand} {phone.model}
@@ -71,12 +72,18 @@ export default function PhoneDetails() {
           </div>
         </div>
       </div>
-      <div className={`group relative mt-8 flex w-1/2 flex-col items-center justify-center`}>
+      <div
+        className={`group relative mt-8 flex w-1/2 flex-col items-center justify-center`}
+      >
         <img src={slides[currentIndex]} className="h-96 rounded-xl" />
-        <div className={`${styles.chevron_icon} absolute left-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block`}>
+        <div
+          className={`${styles.chevron_icon} absolute left-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block`}
+        >
           <BsChevronCompactLeft onClick={prevSlide} size={30} />
         </div>
-        <div className={`${styles.chevron_icon} absolute right-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block`}>
+        <div
+          className={`${styles.chevron_icon} absolute right-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block`}
+        >
           <BsChevronCompactRight onClick={nextSlide} size={30} />
         </div>
         <div className="top-4 flex justify-center py-2">
