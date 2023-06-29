@@ -49,16 +49,16 @@ VALUES
 -- Create phone
 INSERT INTO `phone` (`brand`, `creation_date`, `model`, `thumbnail_1`, `thumbnail_2`, `thumbnail_3`) 
 VALUES 
-('Apple', '2023-06-26', 'iPhone 11', 'iphone-11.jpg', '', ''),
-('Samsung', '2023-06-28', 'Galaxy S10', 'iphone-13.jpg', '', ''),
-('Apple', '2023-06-28', 'iPhone 14', 'iphone-14.jpg', '', ''),
-('Google', '2023-06-28', 'pixel 6', 'google-pixel-6a.jpg', '', ''),
-('Nokia', '2023-02-08', '3310', 'iphone-13.jpg', '', ''),
-('Huawei', '2023-05-24', 'Huawei Mate 50 Pro', '/huawei-mate-50p.jpg', '', ''),
-('Xiaomi', '2023-05-24', 'Redmi Note 10 Pro', 'redmi-note-7.webp', '', ''),
-('Oppo', '2023-07-12', 'Reno 7', 'oppo-reno-7.jpg', '', ''),
-('Xiaomi', '2023-01-24','Redmi Note 11', 'redmi-note-11.jpg', '', ''),
-('Apple', '2023-07-01', 'Iphone 13', 'iphone-13.jpg', '', '');
+('Apple', '2023-06-26', 'iPhone 11', 'iphone-11.jpg', 'iphone-11-2.webp', 'iphone-11-3.webp'),
+('Samsung', '2023-06-28', 'Galaxy S22', 'samsung-galaxy-s22.jpg', 'galaxy-s22.webp', 'galaxy-s22.jpeg'),
+('Apple', '2023-06-28', 'iPhone 14', 'iphone-14.jpg', 'iphone-14.webp', 'iphone-14.avif'),
+('Google', '2023-06-28', 'pixel 6', 'google-pixel-6a.jpg', 'pixel-6.jpeg', 'pixel-6.jpg'),
+('Nokia', '2023-02-08', '3310', 'nokia-3310.jpg', 'nokia-3310.jpeg', 'nokia-3310-2.jpg'),
+('Huawei', '2023-05-24', 'Huawei Mate 50 Pro', 'huawei-mate-50p.jpg', 'mate-50-pro.jpeg', 'huawei50pro.webp'),
+('Xiaomi', '2023-05-24', 'Redmi Note 10 Pro', 'redmi-note-10p.jpg', 'redmi.webp', 'redmi.jpg'),
+('Oppo', '2023-07-12', 'Reno 7', 'oppo-reno-7.webp', 'oppo-reno.webp', 'oppo-reno-7-6.webp'),
+('Xiaomi', '2023-01-24','Redmi Note 11', 'redmi-note-11.jpg', 'raw.jpg', 'redmi.png'),
+('Apple', '2023-07-01', 'Iphone XR', 'iphone-xr.jpg', 'iphone-xr.webp', 'iphone-xr-1.webp');
 
 -- Create feature
 INSERT INTO `feature` (`category`, `color`, `has_charger`, `network`, `OS`, `price`, `RAM`, `screen`, `state`, `storage`, `phone_id`) 
@@ -66,10 +66,10 @@ VALUES
 ('5-Premium', 'argent', 1, '4G', 'iOS', 189.19, 2, 5.8, 'RECONDITIONNE', 32, 1),
 ('5-Premium', 'noir', 0, '4G', 'Android', 209.19, 6, 6.1, 'RECONDITIONNE', 64, 2),
 ('5-Premium', 'argent', 1, '4G', 'iOS', 656.19, 8, 5.8, 'RECONDITIONNABLE', 128, 3),
-('1-HC', 'argent', 0, '4G', 'iOS', 89.25, 6, 5.8, 'BLOQUE', 16, 4),
-('2-B', 'noir', 1, '4G', 'iOS', 169.78, 4, 5.8, 'REPARABLE', 32, 5),
-('2-B', 'argent', 0, '4G', 'iOS', 124, 6, 5.8, 'DEEE', 64, 6),
-('1-HC','noir', 1, '4G', 'iOS', 109, 8, 5.8, 'BLOQUE', 64,  7),
-('1-HC', 'argent', 0, '4G', 'iOS', 89.88, 4, 5.8, 'DEEE', 32, 8),
-('1-HC', 'noir', 1, '4G', 'android', 77, 4, 5.8,'DEEE', 32, 9),
+('1-HC', 'argent', 0, '4G', 'Android', 89.25, 6, 5.8, 'BLOQUE', 16, 4),
+('2-B', 'noir', 1, '1G', 'Android', 169.78, 4, 5.8, 'REPARABLE', 32, 5),
+('2-B', 'argent', 0, '4G', 'Android', 124, 6, 5.8, 'DEEE', 64, 6),
+('1-HC','noir', 1, '4G', 'Android', 109, 8, 5.8, 'BLOQUE', 64,  7),
+('1-HC', 'argent', 0, '4G', 'Android', 89.88, 4, 5.8, 'DEEE', 32, 8),
+('1-HC', 'noir', 1, '4G', 'Android', 77, 4, 5.8,'DEEE', 32, 9),
 ('1-HC', 'argent', 0, '4G', 'iOS', 124.94, 6, 5.8, 'DEEE', 32, 10)
