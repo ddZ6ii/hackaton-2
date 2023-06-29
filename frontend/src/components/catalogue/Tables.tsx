@@ -19,11 +19,7 @@ export default function Tables() {
     model: string;
     category: string;
     price: number;
-    thumbnail_1: string;
-    thumbnail_2: string;
-    thumbnail_3: string;
     creation_date: string;
-    center_id: number;
   }
 
   interface TableParams {
@@ -34,11 +30,6 @@ export default function Tables() {
   }
 
   const columns: ColumnsType<DataType> = [
-    {
-      title: "",
-      dataIndex: "photo",
-      key: "photo",
-    },
     {
       title: "Marque",
       dataIndex: "brand",
@@ -141,7 +132,7 @@ export default function Tables() {
   };
 
   return (
-    <div className="rounded-lg shadow-md">
+    <div className="w-full rounded-lg shadow-md">
       <ConfigProvider
         theme={{
           token: {
