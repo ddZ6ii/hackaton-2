@@ -82,7 +82,7 @@ const postPhone = async (req, res) => {
     res
       .status(500)
       .send(
-        'une erreur est survenue en ajoutant le téléphone dans la base de données'
+        'une erreur est survenue en ajoutant le téléphone dans la base de données...'
       );
   }
 };
@@ -101,7 +101,7 @@ const postFeature = async (req, res) => {
     res
       .status(500)
       .send(
-        'une erreur est survenue en ajoutant le téléphone dans la base de données'
+        'une erreur est survenue en ajoutant le téléphone dans la base de données...'
       );
   }
 };
