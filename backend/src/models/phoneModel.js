@@ -46,7 +46,6 @@ const addFeature = (body, idPhone) => {
       body.screen,
       body.state,
       body.storage,
-      body.phone_id,
       idPhone,
     ]
   );
