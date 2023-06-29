@@ -8,17 +8,29 @@ import type { FilterValue, SorterResult } from "antd/es/table/interface";
 import { EyeOutlined } from "@ant-design/icons";
 
 export default function Tables() {
+  /**
+   * States
+   */
   const [data, setData] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState("");
   const [tableParams, setTableParams] = useState<TableParams>({
     pagination: {
       current: 1,
-      pageSize: 10,
+      pageSize: 5,
     },
   });
 
+  /**
+   * Constants
+   */
+  const API = `${import.meta.env.VITE_BACKEND_URL}/smartphones`;
+
+  /**
+   * TypeScript
+   */
   interface DataType {
-    id: number;
+    id_phone: number;
     brand: string;
     model: string;
     category: string;
@@ -30,36 +42,82 @@ export default function Tables() {
     pagination?: TablePaginationConfig;
     sortField?: string;
     sortOrder?: string;
-    filters?: Record<string, FilterValue>;
+    filters?: Record<string, (FilterValue | null)[] | null>;
   }
+
+  /**
+   * Functions (TO BE PLACED WITHIN A DEDICATED HELPER FOLDER)
+   */
+  const removeDuplicates = (arr: any[], key: string) => {
+    return [...new Set(arr.map((obj: any) => obj[key]))].map((param) => ({
+      text: param,
+      value: param,
+    }));
+  };
+
+  const getApiParams = (params: TableParams) => ({
+    results: params.pagination?.pageSize,
+    page: params.pagination?.current,
+    ...params,
+  });
+
+  const formatQuery = ({ brand, model, category }) => {
+    let query = "";
+    if (brand?.length || model?.length || category?.length) query += "?";
+    if (brand?.length) {
+      query += "marque=" + brand.join("&marque=");
+    }
+    if (model?.length) {
+      if (brand?.length) query += "&";
+      query += "modele=" + model.join("&modele=");
+    }
+    if (category?.length) {
+      if (brand?.length || model?.length) query += "&";
+      query += "categorie=" + category.join("&categorie=");
+    }
+    return query;
+  };
+
+  const fetchData = (url) => {
+    setLoading(true);
+    axios
+      .get(url)
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+        setTableParams({
+          ...tableParams,
+          pagination: {
+            ...tableParams.pagination,
+            total: res.data.totalCount,
+            // total: 100,
+          },
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  };
 
   const columns: ColumnsType<DataType> = [
     {
       title: "Marque",
       dataIndex: "brand",
       key: "brand",
-      filters: [
-        { text: "Apple", value: "Apple" },
-        { text: "Samsung", value: "Samsung" },
-      ],
+      filters: removeDuplicates(data, "brand"),
     },
     {
       title: "Modèle",
       dataIndex: "model",
       key: "model",
-      filters: [
-        { text: "iPhone11", value: "iPhone11" },
-        { text: "Galaxy S10", value: "Galaxy S10" },
-      ],
+      filters: removeDuplicates(data, "model"),
     },
     {
       title: "Catégorie",
       dataIndex: "category",
       key: "category",
-      filters: [
-        { text: "3-B", value: "3-B" },
-        { text: "5-Premium", value: "5-Premium" },
-      ],
+      filters: removeDuplicates(data, "category"),
     },
     {
       title: "Prix",
@@ -87,66 +145,44 @@ export default function Tables() {
       dataIndex: "voir",
       key: "voir",
       render: (_, record) => (
-        <NavLink to={`/product/${record.id}`}>
+        <NavLink to={`/phones/${record.id_phone}`}>
           <EyeOutlined />
         </NavLink>
       ),
     },
   ];
 
-  const getApiParams = (params: TableParams) => ({
-    results: params.pagination?.pageSize,
-    page: params.pagination?.current,
-    ...params,
-  });
-
-  const fetchData = () => {
-    setLoading(true);
-    const apiUrl = `http://localhost:5000/smartphones?${getApiParams(
-      tableParams
-    )}`;
-    axios
-      .get(apiUrl)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-        setTableParams({
-          ...tableParams,
-          pagination: {
-            ...tableParams.pagination,
-            total: res.data.totalCount,
-          },
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [JSON.stringify(tableParams)]);
-
   const handleTableChange = (
     pagination: TablePaginationConfig,
-    filters: Record<string, FilterValue>,
+    filters: Record<string, (FilterValue | null)[] | null>,
     sorter: SorterResult<DataType>
   ) => {
+    // fetch db on table filter change
+    let query = formatQuery(filters);
+    if (query !== currentFilters) {
+      fetchData(`${API}${query}`);
+      setCurrentFilters(query);
+    }
     setTableParams({
       pagination,
       filters,
       ...sorter,
     });
-
     // `dataSource` is useless since `pageSize` changed
     if (pagination.pageSize !== tableParams.pagination?.pageSize) {
       setData([]);
     }
   };
 
+  /**
+   * useEffect
+   */
+  useEffect(() => {
+    fetchData(`${API}`);
+  }, []);
+
   return (
-    <div className="w-full rounded-lg shadow-md">
+    <div className="rounded-lg shadow-md">
       <ConfigProvider
         theme={{
           token: {
@@ -168,6 +204,7 @@ export default function Tables() {
           }}
           loading={loading}
           onChange={handleTableChange}
+          rowKey={(record) => record.id_phone}
         />
       </ConfigProvider>
     </div>
