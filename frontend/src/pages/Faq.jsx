@@ -4,28 +4,28 @@ import RowQuestion from "../components/RowQuestion";
 export default function Faq() {
   const [faqs, setFaqs] = useState([
     {
-      question: "QUESTION 1?",
-      answer: "REPONSE 1.",
+      question: "Comment puis-je me connecter?",
+      answer: "Il suffit d'appuyer sur 'Se connecter' et de rentrer les informations demandées par votre centre.",
       open: true,
     },
     {
-      question: "QUESTION 2?",
-      answer: "REPONSE 2.",
+      question: "Quelles sont les démarques à effectuer pour un téléphone qui ne fonctionne pas?",
+      answer: "Vous pouvez contacter le service client ou voir votre réferent de centre.",
       open: false,
     },
     {
-      question: "QUESTION 3?",
-      answer: "REPONSE 3.",
+      question: "Pouvons-nous régler le télèphone en plusieurs fois?",
+      answer: "Il est possible de régler en plusieurs fois, voir les modalités auprès de votre réferent.",
       open: false,
     },
     {
-      question: "QUESTION 4?",
-      answer: "REPONSE 4.",
+      question: "Notre recherche sera-t-elle mémoriser à chaque connexion sur l'application?",
+      answer: "Un historique de commande peut être effectuée, mais en faire la demande.",
       open: false,
     },
     {
-      question: "QUESTION 5?",
-      answer: "REPONSE 5.",
+      question: "Peut-on être livré directement à son domicile?",
+      answer: "Ces modalités sont à en discuter avec le réferent du centre.",
       open: false,
     },
   ]);
