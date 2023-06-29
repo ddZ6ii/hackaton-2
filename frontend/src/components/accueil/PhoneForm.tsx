@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Form, Input, Radio, Select, Upload } from "antd";
 import type { SelectProps } from "antd";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PhoneForm() {
   const [category, setCategory] = useState("");
+  const [price, setPrice] = useState(0);
   const [form] = Form.useForm();
 
   const brandOptions: SelectProps["options"] = [
@@ -89,8 +93,15 @@ export default function PhoneForm() {
     ponderation: option.ponderation,
   }));
 
+  const normFile = (e: any) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  };
+
   const calculateCategory = () => {
-    // Perform the category calculation here based on the form inputs
+    // Perform the category calculation & price calculation here based on the form inputs
     const selectedAntutuOption = form.getFieldValue("Antutu");
     const antutuValue =
       antutuOptions.find((option) => option.value === selectedAntutuOption)
@@ -114,16 +125,70 @@ export default function PhoneForm() {
     const totalValue = antutuValue + memoryValue + storageValue;
     const categoryValue = totalValue * (1 + ponderationValue / 100);
 
+    let priceRangeA = 0;
+    let priceRangeB = 0;
+
     if (categoryValue >= 90 && categoryValue <= 165) {
       setCategory("2 - C");
+      priceRangeA = 50;
+      priceRangeB = 100;
     } else if (categoryValue > 165 && categoryValue <= 255) {
       setCategory("3 - B");
+      priceRangeA = 100;
+      priceRangeB = 200;
     } else if (categoryValue > 255 && categoryValue <= 375) {
       setCategory("4 - A");
+      priceRangeA = 200;
+      priceRangeB = 300;
     } else if (categoryValue > 375) {
       setCategory("5 - Premium");
+      priceRangeA = 400;
+      priceRangeB = 500;
     } else {
       setCategory("1 - HC");
+      priceRangeA = 0;
+      priceRangeB = 0;
+    }
+
+    const randomPrice = Math.floor(
+      Math.random() * (priceRangeB - priceRangeA + 1) + priceRangeA
+    );
+    setPrice(randomPrice);
+  };
+
+  // Toastify logic to display a pop up on form submit
+  const sendData = async () => {
+    try {
+      await form.validateFields();
+      const values = form.getFieldsValue();
+
+      // Missing database submission logic
+
+      toast.success("Success, your message was sent!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      form.resetFields();
+      setCategory("");
+      setPrice(0);
+    } catch (error) {
+      toast.error("Oops, something went wrong!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -131,15 +196,15 @@ export default function PhoneForm() {
     <>
       <Form
         layout="horizontal"
-        className="w-full items-center justify-center"
+        className="w-full items-center justify-center md:flex md:flex-col md:gap-4"
         form={form}
       >
         {/* Brand and Model */}
         <div className="flex w-full gap-4">
-          <Form.Item label="Marque" className="w-full" required>
+          <Form.Item label="Marque" className="w-full" name="Marque" required>
             <Select className="text-start" options={brandOptions}></Select>
           </Form.Item>
-          <Form.Item label="Modèle" className="w-full" required>
+          <Form.Item label="Modèle" className="w-full" name="Modèle" required>
             <Input />
           </Form.Item>
         </div>
@@ -165,10 +230,10 @@ export default function PhoneForm() {
 
         {/* Network, Screen Size, Antutu */}
         <div className="flex w-full gap-4">
-          <Form.Item label="Réseau" className="w-1/4">
+          <Form.Item label="Réseau" className="w-1/4" name="Réseau">
             <Select className="text-start" options={networkOptions}></Select>
           </Form.Item>
-          <Form.Item label="Ecran" className="w-1/4">
+          <Form.Item label="Ecran" className="w-1/4" name="Ecran">
             <Select className="text-start" options={screenOptions}></Select>
           </Form.Item>
           <Form.Item
@@ -186,7 +251,12 @@ export default function PhoneForm() {
           <Form.Item label="Etat" className="w-full" name="Etat" required>
             <Select className="text-start" options={conditionOptions}></Select>
           </Form.Item>
-          <Form.Item label="Chargeur" className="w-full" required>
+          <Form.Item
+            label="Chargeur"
+            className="w-full"
+            name="Chargeur"
+            required
+          >
             <Radio.Group>
               <Radio value="Oui"> Oui </Radio>
               <Radio value="Non"> Non </Radio>
@@ -195,7 +265,12 @@ export default function PhoneForm() {
         </div>
 
         {/* Upload of picture */}
-        <Form.Item label="Photo(s)" valuePropName="fileList">
+        <Form.Item
+          label="Photo"
+          valuePropName="fileList"
+          name="Photo"
+          getValueFromEvent={normFile}
+        >
           <Upload
             action="/upload.do"
             accept=".jpeg,.jpg,.png,.webp"
@@ -209,14 +284,17 @@ export default function PhoneForm() {
           </Upload>
         </Form.Item>
 
-        {/* Category automatically calculated*/}
-
         {/* Submit button */}
         <div className="flex w-full items-center gap-4">
-          <Form.Item label="Catégorie" className="w-full">
-            <Input disabled value={category} />
-          </Form.Item>
-          <Form.Item>
+          <div className="w-full">
+            <Form.Item label="Catégorie" className="w-full">
+              <Input disabled value={category} />
+            </Form.Item>
+            <Form.Item label="Prix (€)" className="w-full">
+              <Input disabled value={price} />
+            </Form.Item>
+          </div>
+          <Form.Item className="w-full">
             <button
               type="button"
               className="rounded border-0 bg-primary px-3 py-1 text-base text-neutralLight hover:bg-primary/75 md:mt-0"
@@ -226,6 +304,15 @@ export default function PhoneForm() {
             </button>
           </Form.Item>
         </div>
+        <Form.Item>
+          <button
+            type="submit"
+            className="connect-ghostButton"
+            onClick={sendData}
+          >
+            Ajouter au catalogue
+          </button>
+        </Form.Item>
       </Form>
     </>
   );
