@@ -1,5 +1,6 @@
 <!-- Header section -->
-<h1 align="center">Hackaton<img src="./frontend/public/assets/icon/logo.svg" width="30px" height="30px" alt="logo"></h1>
+
+  <h1 align="center">Emmaus Connect <img src="./frontend/public/assets/icons/logo2.svg" width="100px" height="100px" alt="logo"></h1>
 
 ### 🧰 Languages & Frameworks used :
 
@@ -37,4 +38,4 @@
 
 </br>
 
-<em><strong>Note</strong>: This project has been created for a 3-days Hackaton</em>
+<em><strong>Note</strong>: This project has been created for a 48-hours Hackaton</em>

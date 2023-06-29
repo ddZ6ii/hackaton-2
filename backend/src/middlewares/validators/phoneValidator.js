@@ -21,7 +21,6 @@ const phoneSchema = Joi.object({
   screen: Joi.number().precision(2),
   state: Joi.string().max(50).required(),
   storage: Joi.number().integer().required(),
-  phone_id: Joi.number().integer().required(),
 });
 
 export default function validatePhone(req, res, next) {
@@ -42,7 +41,6 @@ export default function validatePhone(req, res, next) {
     screen,
     state,
     storage,
-    phone_id,
   } = req.body;
 
   const { error } = phoneSchema.validate(
@@ -63,7 +61,6 @@ export default function validatePhone(req, res, next) {
       screen,
       state,
       storage,
-      phone_id,
     },
     { abortEarly: false }
   );
