@@ -1,6 +1,7 @@
 import React from "react";
 
 import Tables from "../catalogue/Tables";
+import PhoneForm from "./PhoneForm";
 
 export default function AccueilContainer({ isSignIn }) {
   return (
@@ -9,7 +10,7 @@ export default function AccueilContainer({ isSignIn }) {
         {isSignIn ? "Catalogue" : "Ajout d'un téléphone"}
       </h2>
 
-      {isSignIn ? <Tables /> : <div>This is a test</div>}
+      {isSignIn ? <Tables /> : <PhoneForm />}
     </div>
   );
 }
