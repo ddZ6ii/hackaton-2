@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function NotFound() {
   const navigate = useNavigate();
   return (
-    <section className="min-h-screen justify-center md:min-h-[calc(100vh-80px)]">
+    <section className="min-h-screen justify-center">
       <div className="flex flex-row items-center gap-6">
         <img
           className="rounded-xl md:h-80"

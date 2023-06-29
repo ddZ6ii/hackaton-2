@@ -197,14 +197,6 @@
     overflow: hidden;
     transition: transform 0.6s ease-in-out;
     z-index: 10;
-
-    @media (max-width: 768px) {
-      top: 50%;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      transform: translateY(0);
-    }
   }
 
   .overlay {
@@ -221,15 +213,6 @@
     width: 200%;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
-
-    @media (max-width: 768px) {
-      background: -webkit-linear-gradient(to bottom, #fff, #00acb0);
-      background: linear-gradient(to bottom, #fff, #00acb0);
-      left: 0;
-      height: 100%;
-      width: 100%;
-      transform: translateY(0);
-    }
   }
 
   .overlay-panel {
@@ -245,31 +228,17 @@
     width: 50%;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
-
-    @media (max-width: 768px) {
-      height: 50%;
-      width: 100%;
-      transform: translateY(0);
-    }
   }
 
   .leftoverlay-panel {
     @extend .overlay-panel;
     transform: translateX(-20%);
-
-    @media (max-width: 768px) {
-      transform: translateY(-120%);
-    }
   }
 
   .rightoverlay-panel {
     @extend .overlay-panel;
     right: 0;
     transform: translateX(0);
-
-    @media (max-width: 768px) {
-      transform: translateY(0%);
-    }
   }
   /* End Connect component  */
 }
