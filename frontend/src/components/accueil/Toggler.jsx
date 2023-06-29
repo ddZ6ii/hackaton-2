@@ -3,7 +3,7 @@ import { useState } from "react";
 import Lottie from "lottie-react";
 
 // Components
-import AddPhone from "./AddPhone";
+import AccueilContainer from "./AccueilContainer";
 import LottiePhone from "../../../public/assets/lotties/data-phone.json";
 import LottieLibrary from "../../../public/assets/lotties/library-phone.json";
 
@@ -32,7 +32,7 @@ export default function Connect() {
             : null
         }`}
       >
-        <AddPhone
+        <AccueilContainer
           isSignIn={signIn}
           email={email}
           setEmail={setEmail}
@@ -72,7 +72,7 @@ export default function Connect() {
             </h2>
             <button
               type="button"
-              className="connect-button connect-ghostButton flex items-center gap-2 text-primary"
+              className="connect-button connect-ghostButton flex items-center gap-2"
               onClick={() => toggle(true)}
             >
               Vers le catalogue de téléphone
@@ -110,7 +110,7 @@ export default function Connect() {
 
             <button
               type="button"
-              className="connect-button connect-ghostButton flex items-center gap-2 text-primary"
+              className="connect-button connect-ghostButton flex items-center gap-2"
               onClick={() => toggle(false)}
             >
               <svg

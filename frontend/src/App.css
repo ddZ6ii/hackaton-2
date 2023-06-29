@@ -123,30 +123,15 @@
     }
   }
 
-  .connect-button {
+  .connect-ghostButton {
     font-family: theme("fontFamily.sans");
     font-size: theme("fontSize.base");
     border-radius: 25px;
-    border: transparent;
-    background: -webkit-linear-gradient(to bottom, #9969c4, #4e5db6);
-    background: linear-gradient(to bottom, #9969c4, #4e5db6);
-    color: #ffffff;
     padding: 12px 45px;
-    transition: transform 80ms ease-in;
-    &:active {
-      transform: scale(0.95);
-    }
-    &:focus {
-      outline: none;
-    }
-  }
-
-  .connect-ghostButton {
-    @extend .connect-button;
-    background: none;
-    border: 1px solid theme("colors.primary");
+    background: theme("colors.secondary");
+    color: theme("colors.neutralLight");
     &:hover {
-      background-color: rgba(0, 172, 176, 0.1);
+      background-color: rgba(230, 36, 96, 0.8);
     }
   }
 
@@ -171,8 +156,8 @@
 
   .overlay {
     background: theme("colors.primary");
-    background: -webkit-linear-gradient(to bottom, #f9f9f9, #f9f9f9, #00acb0);
-    background: linear-gradient(to bottom, #f9f9f9, #f9f9f9, #00acb0);
+    background: -webkit-linear-gradient(to bottom, #fff, #ffff, #00acb0);
+    background: linear-gradient(to bottom, #fff, #fff, #00acb0);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -185,8 +170,8 @@
     transition: transform 0.6s ease-in-out;
 
     @media (max-width: 768px) {
-      background: -webkit-linear-gradient(to top, #9969c4, #4e5db6);
-      background: linear-gradient(to top, #9969c4, #4e5db6);
+      background: -webkit-linear-gradient(to bottom, #fff, #00acb0);
+      background: linear-gradient(to bottom, #fff, #00acb0);
       left: 0;
       height: 100%;
       width: 100%;
