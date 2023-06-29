@@ -11,7 +11,8 @@ const findAll = (sql = `SELECT * FROM ${table}`, sqlValues = []) => {
 };
 
 const findOne = (id) => {
-  return database.query(`SELECT * FROM ${table} WHERE id = ?`, [id]);
+  const SQL = `SELECT * FROM ${table} INNER JOIN feature ON feature.id = ${table}.id WHERE ${table}.id = ?`;
+  return database.query(SQL, [id]);
 };
 
 export { findAll, findOne };
