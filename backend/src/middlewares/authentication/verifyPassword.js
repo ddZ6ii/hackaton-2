@@ -21,7 +21,7 @@ const verifyPassword = async (req, res, next) => {
       // create JWT info (token with 1h expiration time)
       const payload = { sub: req.user.id };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: '1h',
+        expiresIn: '48h',
       });
 
       // send back the unique JWT token to the client (to be stored in the local or session storage)

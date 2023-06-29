@@ -89,7 +89,6 @@ const postPhone = async (req, res) => {
 
 const postFeature = async (req, res) => {
   try {
-    console.log(req.body);
     const [phone] = await phoneModel.postPhone(req.body);
     if (phone.affectedRows === 0) {
       return res.status(404).send(`requete non valide!`);
