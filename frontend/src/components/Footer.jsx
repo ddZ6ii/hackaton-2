@@ -12,7 +12,7 @@ export default function Footer() {
         &copy; {currentYear} Emmaus Connect. All rights reserved
       </p>
       <div className="flex items-center gap-4">
-        <a href="https://www.instagram.com/">
+        <a href="https://www.instagram.com/emmausconnect/" target="_blank">
           <svg
             width="30"
             height="30"
@@ -27,7 +27,7 @@ export default function Footer() {
             />
           </svg>
         </a>
-        <a href="https://twitter.com/">
+        <a href="https://twitter.com/EmmausConnect" target="_blank">
           <svg
             width="30"
             height="26"
@@ -43,7 +43,10 @@ export default function Footer() {
             />
           </svg>
         </a>
-        <a href="https://www.facebook.com/">
+        <a
+          href="https://www.facebook.com/connectemmaus/?locale=fr_FR"
+          target="_blank"
+        >
           <svg
             width="30"
             height="30"
