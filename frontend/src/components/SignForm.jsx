@@ -1,26 +1,18 @@
 import { useState } from "react";
 
 export default function SignForm() {
-  const [signIn, toggle] = useState(true);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [passwordConfVisible, setPasswordConfVisible] = useState(false);
 
   const handlePassVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handlePassConfVisibility = () => {
-    setPasswordConfVisible(!passwordConfVisible);
-  };
-
   const passwordType = passwordVisible ? "text" : "password";
-  const passwordConfType = passwordConfVisible ? "text" : "password";
 
   return (
-    <form className="flex h-full flex-col items-center justify-center gap-4 px-20 text-center">
+    <form className="mx-24 flex w-full flex-col items-center justify-start gap-4 text-center md:max-w-[500px]">
       <h2 className="text-xl uppercase">Connexion</h2>
       <input
         type="email"
