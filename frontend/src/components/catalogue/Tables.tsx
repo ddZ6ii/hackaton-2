@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
+
 import { Table, ConfigProvider } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
-import axios from "axios";
+import { EyeOutlined } from "@ant-design/icons";
 
 export default function Tables() {
   const [data, setData] = useState<DataType[]>([]);
@@ -15,6 +18,7 @@ export default function Tables() {
   });
 
   interface DataType {
+    id: number;
     brand: string;
     model: string;
     category: string;
@@ -82,6 +86,11 @@ export default function Tables() {
       title: "",
       dataIndex: "voir",
       key: "voir",
+      render: (_, record) => (
+        <NavLink to={`/product/${record.id}`}>
+          <EyeOutlined />
+        </NavLink>
+      ),
     },
   ];
 
