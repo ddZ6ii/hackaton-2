@@ -5,13 +5,16 @@ import { ToastContainer } from 'react-toastify';
 
 // Component
 import App from './App';
+import { UserProvider } from './contexts/userContex';
 
 // Style
 import './App.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
-    <App />
-    <ToastContainer />
+    <UserProvider>
+      <App />
+      <ToastContainer />
+    </UserProvider>
   </Router>
 );
