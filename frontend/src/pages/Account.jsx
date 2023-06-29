@@ -1,10 +1,10 @@
 // Components
-import Connect from '../components/Connect';
+import SignForm from "../components/SignForm";
 
 export default function Account() {
   return (
-    <section className='flex items-center'>
-      <Connect />
+    <section className="flex items-center">
+      <SignForm />
     </section>
   );
 }
