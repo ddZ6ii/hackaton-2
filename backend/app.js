@@ -1,10 +1,14 @@
 import express from 'express';
 import mainRouter from './src/routers/mainRouter.js';
+import * as fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import cors from 'cors';
-import multer from 'multer';
 
 const app = express();
-const upload = multer({ dest: './public/uploads/' });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 /**
  * MIDDLEWARE
  */
@@ -18,7 +22,7 @@ app.use(
 app.use(express.json());
 
 // Serve the public folder for public resources
-// app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 /**
  * ROUTING
