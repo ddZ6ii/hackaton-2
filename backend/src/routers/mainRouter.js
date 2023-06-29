@@ -26,7 +26,7 @@ const upload = multer({ dest: './public/uploads/' });
 router.post('/login', getUserByEmailWithPasswordAndPassToNext, verifyPassword);
 
 // authentication wall : verifyToken is activated for each route after this line
-// router.use(verifyToken);
+router.use(verifyToken);
 router.get('/smartphones', phoneController.getPhones);
 router.get('/smartphones/:id', phoneController.getPhone);
 router.post('/smartphones', validatePhone, phoneController.postPhone);
