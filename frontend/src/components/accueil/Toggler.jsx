@@ -72,7 +72,7 @@ export default function Connect() {
             </h2>
             <button
               type="button"
-              className="connect-button connect-ghostButton flex items-center gap-2 text-primary"
+              className="connect-button connect-ghostButton flex items-center gap-2"
               onClick={() => toggle(true)}
             >
               Vers le catalogue de téléphone
@@ -110,7 +110,7 @@ export default function Connect() {
 
             <button
               type="button"
-              className="connect-button connect-ghostButton flex items-center gap-2 text-primary"
+              className="connect-button connect-ghostButton flex items-center gap-2"
               onClick={() => toggle(false)}
             >
               <svg
