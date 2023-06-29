@@ -144,9 +144,9 @@
   .connect-ghostButton {
     @extend .connect-button;
     background: none;
-    border: 1px solid #ffffff;
+    border: 1px solid theme("colors.primary");
     &:hover {
-      background-color: rgba(245, 245, 245, 0.3);
+      background-color: rgba(0, 172, 176, 0.1);
     }
   }
 
@@ -170,9 +170,9 @@
   }
 
   .overlay {
-    background: #ff416c;
-    background: -webkit-linear-gradient(to right, #9969c4, #4e5db6);
-    background: linear-gradient(to right, #9969c4, #4e5db6);
+    background: theme("colors.primary");
+    background: -webkit-linear-gradient(to bottom, #f9f9f9, #f9f9f9, #00acb0);
+    background: linear-gradient(to bottom, #f9f9f9, #f9f9f9, #00acb0);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
