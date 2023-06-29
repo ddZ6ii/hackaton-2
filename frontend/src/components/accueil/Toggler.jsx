@@ -3,7 +3,7 @@ import { useState } from "react";
 import Lottie from "lottie-react";
 
 // Components
-import AddPhone from "./AddPhone";
+import AccueilContainer from "./AccueilContainer";
 import LottiePhone from "../../../public/assets/lotties/data-phone.json";
 import LottieLibrary from "../../../public/assets/lotties/library-phone.json";
 
@@ -32,7 +32,7 @@ export default function Connect() {
             : null
         }`}
       >
-        <AddPhone
+        <AccueilContainer
           isSignIn={signIn}
           email={email}
           setEmail={setEmail}
