@@ -10,6 +10,8 @@ export default function NavBar() {
   const [active, setActive] = useState('');
   const { isLoggedIn, setIsLoggedIn } = useIdentification();
 
+  const API = `${import.meta.env.VITE_BACKEND_URL}/logout`;
+
   const handleClick = () => {
     setActive(active === '' ? 'active' : '');
   };
@@ -21,7 +23,14 @@ export default function NavBar() {
   const handleDisconnect = () => {
     //update userContext
     setIsLoggedIn(false);
-    // remove jwt from cookie
+    // handle logout (remove jwt from cookie)
+    axios
+      .get(API, { withCredentials: true })
+      .then((res) => {
+        console.warn(res.data.message);
+        navigate('/login');
+      })
+      .catch((err) => console.error(err.response.data.message));
     // page redirection
     navigate('/');
   };

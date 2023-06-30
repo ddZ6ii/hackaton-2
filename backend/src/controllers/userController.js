@@ -50,4 +50,8 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export { getAllUsers, postUser, deleteUser };
+const logoutUser = async (req, res) => {
+  res.clearCookie('appjwt').status(200).json({ message: 'user logged out' });
+};
+
+export { getAllUsers, postUser, deleteUser, logoutUser };
