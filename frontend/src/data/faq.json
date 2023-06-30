@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Comment puis-je me connecter?",
+    "answer": "Il suffit d'appuyer sur 'Se connecter' et de saisir les informations demandées par votre centre.",
+    "open": true
+  },
+  {
+    "question": "Quelles sont les démarches à effectuer pour un téléphone qui ne fonctionne pas?",
+    "answer": "Vous pouvez contacter le service client ou voir directement avec votre référent de centre.",
+    "open": false
+  },
+  {
+    "question": "Pouvons-nous régler le télèphone en plusieurs fois?",
+    "answer": "Il est possible de régler en plusieurs fois, voir les modalités auprès de votre référent.",
+    "open": false
+  },
+  {
+    "question": "Notre recherche sera-t-elle mémorisée à chaque connexion sur l'application?",
+    "answer": "Un historique de commande peut être effectué, mais en faire la demande.",
+    "open": false
+  },
+  {
+    "question": "Peut-on être livré directement à son domicile?",
+    "answer": "Ces modalités sont à en discuter avec le référent du centre.",
+    "open": false
+  }
+]
