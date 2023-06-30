@@ -21,7 +21,7 @@ export default function NotFound() {
             accessible actuellement.
           </p>
           <button
-            onClick={() => navigate("/accueil")}
+            onClick={() => navigate("/")}
             className="mt-4 rounded-3xl bg-primary p-2 text-white"
           >
             Retour à la page d'accueil
