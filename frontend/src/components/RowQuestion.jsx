@@ -8,7 +8,7 @@ export default function RowQuestion({ faq, index, toggleFAQ }) {
       onClick={() => toggleFAQ(index)}
     >
       <div className='faq-question'>{faq.question}</div>
-      <div className='faq-answer rounded-full bg-neutralLight/80 px-8 py-4 text-neutralDark'>
+      <div className='faq-answer rounded-xl bg-neutralLight/80 px-8 py-4 text-neutralDark'>
         {faq.answer}
       </div>
     </div>
