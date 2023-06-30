@@ -32,7 +32,7 @@ export default function NavBar() {
       })
       .catch((err) => console.error(err.response.data.message));
     // page redirection
-    navigate('/');
+    navigate('compte');
   };
 
   return (
@@ -73,28 +73,28 @@ export default function NavBar() {
 
       {isLoggedIn && (
         <nav>
-          <label className='burger absolute right-5 top-[25%] z-10 sm:hidden'>
+          <label className="burger absolute right-5 top-[25%] z-10 flex md:hidden">
             <input
-              type='checkbox'
+              type="checkbox"
               onChange={handleClick}
-              checked={active === 'active'}
+              checked={active === "active"}
             />
-            <span className='burgerline'>{}</span>
-            <span className='burgerline'>{}</span>
-            <span className='burgerline'>{}</span>
+            <span className="burgerline">{}</span>
+            <span className="burgerline">{}</span>
+            <span className="burgerline">{}</span>
           </label>
           <div
-            className={`menu absolute right-0 top-[0px] z-20 flex w-[140px] translate-y-[-150%] flex-col rounded-bl-md py-20 sm:hidden ${active} items-center gap-5 bg-primary`}
+            className={`menu absolute right-0 top-[0px] z-20 flex w-[140px] translate-y-[-150%] flex-col rounded-bl-md py-20 md:hidden ${active} items-center gap-5 bg-primary`}
           >
             <NavLink
-              to='accueil'
+              to="accueil"
               onClick={handleClickLink}
               className={`text-center text-neutralLight`}
             >
               Accueil
             </NavLink>
             <NavLink
-              to='faq'
+              to="faq"
               onClick={handleClickLink}
               className={`text-center text-neutralLight`}
             >
