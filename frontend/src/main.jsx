@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 
 // Component
-import App from './App';
-import { UserProvider } from './contexts/UserContext';
+import App from "./App";
+import { UserProvider } from "./contexts/UserContext";
 
 // Style
 import "./App.css";
@@ -14,6 +14,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <UserProvider>
       <App />
     </UserProvider>
-    <App />
   </Router>
 );

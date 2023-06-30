@@ -52,7 +52,7 @@ export default function Faq() {
 
   return (
     <section className="flex items-center justify-center">
-      <h2 className="text-xl uppercase">FAQ Page</h2>
+      <h2 className="text-xl uppercase">FAQ</h2>
       <div className="faqs">
         {faqs.map((faq, index) => (
           <RowQuestion
@@ -62,6 +62,10 @@ export default function Faq() {
             toggleFAQ={toggleFAQ}
           />
         ))}
+        <img
+          className="absolute bottom-0 right-0 w-[500px]"
+          src="../assets/icons/logo.svg"
+        ></img>
       </div>
     </section>
   );

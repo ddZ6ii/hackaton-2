@@ -1,6 +1,6 @@
 import React from "react";
 
-import Tables from "../catalogue/Tables";
+import Tables from "../accueil/Tables";
 import PhoneForm from "./PhoneForm";
 
 export default function AccueilContainer({ isSignIn }) {
