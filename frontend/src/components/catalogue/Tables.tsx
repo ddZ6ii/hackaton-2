@@ -79,6 +79,23 @@ export default function Tables() {
     return query;
   };
 
+  //export to CSV
+  const exportToCSV = () => {
+    const csvContent = "data:text/csv;charset=utf-8," + convertToCSV(data);
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "smartphonedata.csv");
+    document.body.appendChild(link);
+    link.click();
+  };
+
+  const convertToCSV = (data) => {
+    const header = Object.keys(data[0]).join(",");
+    const rows = data.map((item) => Object.values(item).join(","));
+    return [header, ...rows].join("\n");
+  };
+
   const fetchData = (url) => {
     setLoading(true);
     axios
@@ -196,32 +213,41 @@ export default function Tables() {
   }, []);
 
   return (
-    <div className="rounded-lg shadow-md">
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#00ACB0",
-            colorTextHeading: "#002743",
-            colorText: "#00ACB0",
-            colorBorderSecondary: "#EBEBEB",
-            colorFillSecondary: "#EBEBEB",
-            fontSize: 16,
-          },
-        }}
-      >
-        <Table
-          columns={columns}
-          dataSource={data}
-          pagination={{
-            position: ["bottomCenter"],
-            ...tableParams.pagination,
+    <>
+      <div className="rounded-lg shadow-md">
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#00ACB0",
+              colorTextHeading: "#002743",
+              colorText: "#00ACB0",
+              colorBorderSecondary: "#EBEBEB",
+              colorFillSecondary: "#EBEBEB",
+              fontSize: 16,
+            },
           }}
-          loading={loading}
-          onChange={handleTableChange}
-          rowKey={(record) => record.id_phone}
-          tableLayout={isMobile ? "auto" : "fixed"}
-        />
-      </ConfigProvider>
-    </div>
+        >
+          <Table
+            columns={columns}
+            dataSource={data}
+            pagination={{
+              position: ["bottomCenter"],
+              ...tableParams.pagination,
+            }}
+            loading={loading}
+            onChange={handleTableChange}
+            rowKey={(record) => record.id_phone}
+            tableLayout={isMobile ? "auto" : "fixed"}
+          />
+        </ConfigProvider>
+      </div>
+      <button
+        type="button"
+        className="connect-ghostButton"
+        onClick={exportToCSV}
+      >
+        Exporter le tableau en CSV
+      </button>
+    </>
   );
 }
