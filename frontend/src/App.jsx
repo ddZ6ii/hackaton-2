@@ -21,10 +21,14 @@ export default function App() {
       <main className="min-h-[calc(100dvh-45px)] pt-24 md:min-h-[calc(100vh-134px)] md:pt-0">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/accueil" element={<Accueil />} />
-          <Route path="/faq" element={<Faq />} />
+          {isLoggedIn && (
+            <>
+              <Route path="/accueil" element={<Accueil />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/phones/:id" element={<PhoneDetails />} />
+            </>
+          )}
           <Route path="/account" element={<Account />} />
-          <Route path="/phones/:id" element={<PhoneDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
