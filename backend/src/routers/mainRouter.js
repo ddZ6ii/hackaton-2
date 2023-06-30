@@ -26,15 +26,15 @@ router.post('/login', getUserByEmailWithPasswordAndPassToNext, verifyPassword);
 router.get('/logout', userController.logoutUser);
 
 // authentication wall : verifyToken is activated for each route after this line
-// router.use(verifyToken);
+router.use(verifyToken);
 
 /**
  * PHONE ROUTING
  */
 router.get('/smartphones', phoneController.getPhones);
 router.get('/smartphones/:id', phoneController.getPhone);
+// route below not passing validation (require color/OS ?!)
 // router.post("/smartphones", validatePhone, phoneController.postPhone);
-// validatePhone require color/OS ?!
 router.post('/smartphones', phoneController.postPhone);
 router.delete('/smartphones/:id', phoneController.deletePhone);
 

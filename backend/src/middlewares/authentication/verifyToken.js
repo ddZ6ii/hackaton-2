@@ -7,17 +7,10 @@ import jwt from 'jsonwebtoken';
 
 const verifyToken = (req, res, next) => {
   try {
-    const authorizationHeader = req.get('Authorization');
-    if (!authorizationHeader) {
-      throw new Error("en-tete d'autorisation manquant!");
-    }
-
-    const [type, token] = authorizationHeader.split(' ');
-    if (type !== 'Bearer') {
-      throw new Error("L'entête Autorisation n'a pas le type 'Bearer'");
-    }
-
-    req.payload = jwt.verify(token, process.env.JWT_SECRET);
+    const token = req.cookies.appjwt;
+    if (!token)
+      return res.status(401).json({ message: 'no authentication token' });
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (err) {
     console.error(err);

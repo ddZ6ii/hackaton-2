@@ -50,7 +50,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const logoutUser = async (req, res) => {
+const logoutUser = (req, res) => {
   res.clearCookie('appjwt').status(200).json({ message: 'user logged out' });
 };
 

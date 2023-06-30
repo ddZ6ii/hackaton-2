@@ -21,12 +21,15 @@ export default function SignForm() {
     setPasswordVisible(!passwordVisible);
   };
 
-  const fetchData = (reqBody) => {
-    setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const body = { email, password };
     axios
-      .post(API, reqBody)
+      .post(API, body, { withCredentials: true })
       .then((res) => {
+        console.log(res.data);
         setLoading(false);
+        // notify user
         toast.success('vous etes maintenant connecte', {
           position: 'bottom-right',
           autoClose: 3000,
@@ -37,11 +40,9 @@ export default function SignForm() {
           progress: undefined,
           theme: 'dark',
         });
-        // get user info and update context
+        // get user info and update context (authentication token is saved as a cookie)
         setIsLoggedIn(true);
-        setIsAdmin(res.data.user.is_admin);
-        // save token to local storage (or cookies)
-        localStorage.setItem('jwt', JSON.stringify(res.data.token));
+        setIsAdmin(res.data.is_admin);
         // page redirection
         navigate('/accueil');
       })
@@ -59,12 +60,6 @@ export default function SignForm() {
           theme: 'dark',
         });
       });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const body = { email, password };
-    fetchData(body);
   };
 
   const passwordType = passwordVisible ? 'text' : 'password';

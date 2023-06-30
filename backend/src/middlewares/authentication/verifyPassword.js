@@ -18,14 +18,17 @@ const verifyPassword = async (req, res, next) => {
       delete req.body.password;
       delete req.user.password;
 
-      // create JWT info (token with 1h expiration time)
-      const payload = { sub: req.user.id };
+      // create JWT info (token with expiration time)
+      const payload = { sub: req.user.id_user };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: '48h',
       });
 
-      // send back the unique JWT token to the client (to be stored in the local or session storage)
-      res.send({ token, user: req.user });
+      // send back authentication token to the client and save it as a cookie
+      res
+        .cookie('appjwt', token, { httpOnly: true })
+        .status(200)
+        .send(req.user);
     } else {
       // authentication failded (password did not match)
       res

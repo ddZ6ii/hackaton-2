@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 import { useIdentification } from '../../hooks/useIdentification';
 
 import '../../app.css';
@@ -28,7 +29,6 @@ export default function NavBar() {
       .get(API, { withCredentials: true })
       .then((res) => {
         console.warn(res.data.message);
-        navigate('/login');
       })
       .catch((err) => console.error(err.response.data.message));
     // page redirection
