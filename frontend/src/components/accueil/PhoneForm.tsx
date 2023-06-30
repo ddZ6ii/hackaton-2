@@ -3,6 +3,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Form, Input, Radio, Select, Upload } from "antd";
 import type { SelectProps } from "antd";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,10 +20,6 @@ export default function PhoneForm() {
     "Nokia",
     "Motorola",
   ].map((brand) => ({ value: brand, label: brand }));
-
-  const handleChange = (value: string | string[]) => {
-    console.log(`Selected: ${value}`);
-  };
 
   const storageOptions: SelectProps["options"] = [
     { value: "8Go", valS: 0 },
@@ -160,11 +157,42 @@ export default function PhoneForm() {
   const sendData = async () => {
     try {
       await form.validateFields();
-      const values = form.getFieldsValue();
+      const values = {
+        ...form.getFieldsValue(),
+        price: price,
+        category: category,
+      };
+      const formatedValues = {
+        brand: values.Marque,
+        creation_date:
+          new Date().getFullYear() +
+          "-" +
+          ("0" + (new Date().getMonth() + 1)).slice(-2) +
+          "-" +
+          ("0" + new Date().getDate()).slice(-2),
+        model: values.Modèle,
+        thumbnail_1: "",
+        thumbnail_2: "",
+        thumbnail_3: "",
+        category: values.category,
+        color: "",
+        has_charger: values.Chargeur === "Oui" ? true : false,
+        network: values.Réseau,
+        OS: "",
+        price: values.price,
+        RAM: Number(values.RAM.replace("Go", "")),
+        screen: Number(values.Ecran.split(" ")[0]),
+        state: values.Etat,
+        storage: Number(values.Stockage.replace("Go", "")),
+      };
 
-      // Missing database submission logic
+      axios
+        .post("http://localhost:5000/smartphones", formatedValues)
+        .then((res) => console.log(res.data))
+        .catch((err) => console.error(err));
 
-      toast.success("Success, your message was sent!", {
+
+      toast.success("Téléphone ajouté !", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
@@ -179,7 +207,7 @@ export default function PhoneForm() {
       setCategory("");
       setPrice(0);
     } catch (error) {
-      toast.error("Oops, something went wrong!", {
+      toast.error("Oops, une erreur est survenue !", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
@@ -220,11 +248,7 @@ export default function PhoneForm() {
             <Select className="text-start" options={storageOptions} />
           </Form.Item>
           <Form.Item label="RAM" className="w-full" name="RAM" required>
-            <Select
-              className="text-start"
-              onChange={handleChange}
-              options={memoryOptions}
-            />
+            <Select className="text-start" options={memoryOptions} />
           </Form.Item>
         </div>
 

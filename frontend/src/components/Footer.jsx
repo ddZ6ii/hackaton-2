@@ -11,8 +11,8 @@ export default function Footer() {
       <p className='text-xs md:text-sm'>
         &copy; {currentYear} Emmaus Connect. Tous droits réservés
       </p>
-      <div className='flex items-center gap-4'>
-        <a href='https://www.instagram.com/emmausconnect/' target='_blank'>
+      <div className="hidden items-center gap-4 md:flex">
+        <a href="https://www.instagram.com/emmausconnect/" target="_blank">
           <svg
             width='30'
             height='30'

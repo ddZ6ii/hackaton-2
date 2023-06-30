@@ -17,10 +17,10 @@ export default function NavBar() {
   };
 
   return (
-    <header className='bg-neutralDarkest text-neutralLightest fixed z-20 w-full'>
-      <nav className='flex w-full flex-col flex-wrap justify-between px-8 py-3 shadow md:flex-row md:items-center'>
-        <NavLink to='/' className='flex md:mb-0 md:items-center'>
-          <img src='../assets/icons/logo2.svg' alt='emmaus-connect' />
+    <header className="fixed z-20 w-full bg-white md:sticky">
+      <nav className="flex w-full flex-col flex-wrap justify-between px-8 py-3 shadow md:flex-row md:items-center">
+        <NavLink to="/" className="flex md:mb-0 md:items-center">
+          <img src="../assets/icons/logo2.svg" alt="emmaus-connect" />
         </NavLink>
 
         {/* {isLoggedIn && ( */}

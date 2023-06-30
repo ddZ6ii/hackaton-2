@@ -4,13 +4,18 @@ import Tables from "../catalogue/Tables";
 import PhoneForm from "./PhoneForm";
 
 export default function AccueilContainer({ isSignIn }) {
-  return (
-    <div className="flex h-full flex-col items-center justify-start gap-8 bg-white px-12 pt-8 text-center ">
-      <h2 className="font-header text-neutralDarkest dark:text-neutralLightest text-xl uppercase">
-        {isSignIn ? "Catalogue" : "Ajout d'un téléphone"}
-      </h2>
+  const isMobile = window.innerWidth <= 768;
 
-      {isSignIn ? <Tables /> : <PhoneForm />}
+  return (
+    <div className="flex flex-col items-center justify-start gap-8 bg-white px-12 pt-32 text-center ">
+      <h2 className="text-xl uppercase">
+        {isMobile
+          ? "Ajout d'un téléphone"
+          : isSignIn
+          ? "Catalogue"
+          : "Ajout d'un téléphone"}
+      </h2>
+      {isMobile ? <PhoneForm /> : isSignIn ? <Tables /> : <PhoneForm />}
     </div>
   );
 }

@@ -10,60 +10,35 @@ import LottieLibrary from "../../../public/assets/lotties/library-phone.json";
 export default function Connect() {
   const [signIn, toggle] = useState(true);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [passwordConfVisible, setPasswordConfVisible] = useState(false);
-
-  const handlePassVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const handlePassConfVisibility = () => {
-    setPasswordConfVisible(!passwordConfVisible);
-  };
-
   return (
-    <div className="relative flex h-[calc(100dvh-183px)] w-screen max-w-full flex-col overflow-hidden bg-neutralLight md:min-h-[calc(100dvh-134px)]">
+    <div className="w-screen max-w-full md:relative md:h-[calc(100dvh-134px)]">
       <div
         className={`signin-container ${
           signIn !== true
-            ? "z-10 translate-y-full transform opacity-100 md:translate-x-full md:translate-y-0"
+            ? "md:translate-x-full md:translate-y-0 md:transform md:opacity-100"
             : null
         }`}
       >
-        <AccueilContainer
-          isSignIn={signIn}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          passwordVisible={passwordVisible}
-          passwordConfVisible={passwordConfVisible}
-          handlePassVisibility={handlePassVisibility}
-          handlePassConfVisibility={handlePassConfVisibility}
-        />
+        <AccueilContainer isSignIn={signIn} />
       </div>
 
       <div
-        className={`overlay-container ${
+        className={`overlay-container hidden md:block ${
           signIn !== true
-            ? " -translate-y-full transform md:-translate-x-full md:translate-y-0"
+            ? "md:-translate-x-full md:translate-y-0 md:transform"
             : null
         }`}
       >
         <div
-          className={`overlay ${
+          className={`overlay hidden md:block ${
             signIn !== true
-              ? "translate-y-2/4 transform md:translate-x-2/4 md:translate-y-0"
+              ? "md:translate-x-2/4 md:translate-y-0 md:transform"
               : null
           }`}
         >
           <div
             className={`overlay-panel leftoverlay-panel justify-center gap-8 ${
-              signIn !== true
-                ? " translate-y-0 transform md:translate-x-0"
-                : null
+              signIn !== true ? "md:translate-x-0 md:transform" : null
             }`}
           >
             <h2 className="text-xl uppercase text-default">
@@ -99,7 +74,7 @@ export default function Connect() {
           <div
             className={`overlay-panel rightoverlay-panel justify-center gap-8 ${
               signIn !== true
-                ? " translate-y-[120%] transform md:translate-x-[20%] md:translate-y-0"
+                ? "md:translate-x-[20%] md:translate-y-0 md:transform"
                 : null
             }`}
           >

@@ -27,14 +27,15 @@ router.post('/login', getUserByEmailWithPasswordAndPassToNext, verifyPassword);
 
 // authentication wall : verifyToken is activated for each route after this line
 // router.use(verifyToken);
-router.get('/smartphones', phoneController.getPhones);
-router.get('/smartphones/:id', phoneController.getPhone);
-router.post('/smartphones', validatePhone, phoneController.postPhone);
-router.delete('/smartphones/:id', phoneController.deletePhone);
+router.get("/smartphones", phoneController.getPhones);
+router.get("/smartphones/:id", phoneController.getPhone);
+// router.post("/smartphones", validatePhone, phoneController.postPhone);
+// validatePhone require color/OS ?!
+router.post("/smartphones", phoneController.postPhone);
+router.delete("/smartphones/:id", phoneController.deletePhone);
 
 // route for uploading 1 or multiple files
-router.post('/upload_files', upload.array('files'), (req, res) => {
-  console.log(req.files);
+router.post("/upload_files", upload.array("files"), (req, res) => {
   if (!req?.files.length)
     return res.status(400).send('bad request: empty body');
 
