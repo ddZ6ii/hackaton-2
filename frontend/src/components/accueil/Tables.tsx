@@ -6,6 +6,8 @@ import { Table, ConfigProvider } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
 import { EyeOutlined } from "@ant-design/icons";
+import { UploadOutlined, DownloadOutlined } from "@ant-design/icons";
+import { Button, message, Upload } from "antd";
 
 export default function Tables() {
   /**
@@ -94,6 +96,19 @@ export default function Tables() {
     const header = Object.keys(data[0]).join(",");
     const rows = data.map((item) => Object.values(item).join(","));
     return [header, ...rows].join("\n");
+  };
+
+  // Upload logic
+  const onChange = (info) => {
+    if (info.file.status !== "uploading") {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+      setUploadedFile(info.file);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
   };
 
   const fetchData = (url) => {
@@ -241,13 +256,34 @@ export default function Tables() {
           />
         </ConfigProvider>
       </div>
-      <button
-        type="button"
-        className="connect-ghostButton"
-        onClick={exportToCSV}
-      >
-        Exporter le tableau en CSV
-      </button>
+      <div className="flex gap-8">
+        <Upload
+          name="file"
+          action="/upload.do"
+          accept=".csv"
+          maxCount={1}
+          headers={{
+            authorization: "authorization-text",
+          }}
+          onClick={exportToCSV}
+        >
+          <Button icon={<DownloadOutlined />}>
+            Exporter le tableau en CSV
+          </Button>
+        </Upload>
+        <Upload
+          name="file"
+          action="/upload.do"
+          accept=".csv"
+          maxCount={1}
+          headers={{
+            authorization: "authorization-text",
+          }}
+          onChange={onChange}
+        >
+          <Button icon={<UploadOutlined />}>Importer un fichier CSV</Button>
+        </Upload>
+      </div>
     </>
   );
 }

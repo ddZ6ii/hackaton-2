@@ -63,7 +63,7 @@ export default function Faq() {
           />
         ))}
         <img
-          className="absolute bottom-0 right-0 w-[500px]"
+          className="absolute bottom-0 right-0 -z-10 w-[500px]"
           src="../assets/icons/logo.svg"
         ></img>
       </div>

@@ -55,43 +55,44 @@ export default function NavBar() {
       </nav>
 
       {isLoggedIn && (
-        <label className="burger absolute right-5 top-[25%] z-10 sm:hidden">
-          <input
-            type="checkbox"
-            onChange={handleClick}
-            checked={active === "active"}
-          />
-          <span className="burgerline">{}</span>
-          <span className="burgerline">{}</span>
-          <span className="burgerline">{}</span>
-        </label>
+        <nav>
+          <label className="burger absolute right-5 top-[25%] z-10 flex md:hidden">
+            <input
+              type="checkbox"
+              onChange={handleClick}
+              checked={active === "active"}
+            />
+            <span className="burgerline">{}</span>
+            <span className="burgerline">{}</span>
+            <span className="burgerline">{}</span>
+          </label>
+          <div
+            className={`menu absolute right-0 top-[0px] z-20 flex w-[140px] translate-y-[-150%] flex-col rounded-bl-md py-20 md:hidden ${active} items-center gap-5 bg-primary`}
+          >
+            <NavLink
+              to="accueil"
+              onClick={handleClickLink}
+              className={`text-center text-neutralLight`}
+            >
+              Accueil
+            </NavLink>
+            <NavLink
+              to="faq"
+              onClick={handleClickLink}
+              className={`text-center text-neutralLight`}
+            >
+              FAQ
+            </NavLink>
+            <NavLink
+              to="compte"
+              onClick={handleClickLink}
+              className={`text-center text-neutralLight`}
+            >
+              Se déconnecter
+            </NavLink>
+          </div>
+        </nav>
       )}
-
-      <nav
-        className={`menu absolute right-0 top-[0px] z-20 flex w-[140px] translate-y-[-150%] flex-col rounded-bl-md py-20 sm:hidden ${active} items-center gap-5 bg-primary`}
-      >
-        <NavLink
-          to="accueil"
-          onClick={handleClickLink}
-          className={`text-center text-neutralLight`}
-        >
-          Accueil
-        </NavLink>
-        <NavLink
-          to="faq"
-          onClick={handleClickLink}
-          className={`text-center text-neutralLight`}
-        >
-          FAQ
-        </NavLink>
-        <NavLink
-          to="account"
-          onClick={handleClickLink}
-          className={`text-center text-neutralLight`}
-        >
-          Se connecter
-        </NavLink>
-      </nav>
     </header>
   );
 }

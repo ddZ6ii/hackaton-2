@@ -71,7 +71,7 @@ export default function SignForm() {
 
   return (
     <form
-      className="mx-24 flex w-full flex-col items-center justify-start gap-4 text-center md:max-w-[500px]"
+      className="mx-24 flex w-full flex-col items-center gap-8 text-center md:max-w-[500px]"
       onSubmit={handleSubmit}
     >
       <h2 className="text-xl uppercase">Connexion</h2>
