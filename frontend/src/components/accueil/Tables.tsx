@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-import { Table, ConfigProvider } from 'antd';
-import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
-import type { FilterValue, SorterResult } from 'antd/es/table/interface';
-import { EyeOutlined } from '@ant-design/icons';
-import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
-import { Button, message, Upload } from 'antd';
+import { Table, ConfigProvider } from "antd";
+import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
+import type { FilterValue, SorterResult } from "antd/es/table/interface";
+import { EyeOutlined } from "@ant-design/icons";
+import { UploadOutlined, DownloadOutlined } from "@ant-design/icons";
+import { Button, message, Upload } from "antd";
 
 export default function Tables() {
   /**
@@ -16,7 +16,7 @@ export default function Tables() {
   const [data, setData] = useState<DataType[]>([]);
   const [newData, setNewData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [currentFilters, setCurrentFilters] = useState('');
+  const [currentFilters, setCurrentFilters] = useState("");
   const [tableParams, setTableParams] = useState<TableParams>({
     pagination: {
       current: 1,
@@ -66,37 +66,37 @@ export default function Tables() {
   });
 
   const formatQuery = ({ brand, model, category }) => {
-    let query = '';
-    if (brand?.length || model?.length || category?.length) query += '?';
+    let query = "";
+    if (brand?.length || model?.length || category?.length) query += "?";
     if (brand?.length) {
-      query += 'marque=' + brand.join('&marque=');
+      query += "marque=" + brand.join("&marque=");
     }
     if (model?.length) {
-      if (brand?.length) query += '&';
-      query += 'modele=' + model.join('&modele=');
+      if (brand?.length) query += "&";
+      query += "modele=" + model.join("&modele=");
     }
     if (category?.length) {
-      if (brand?.length || model?.length) query += '&';
-      query += 'categorie=' + category.join('&categorie=');
+      if (brand?.length || model?.length) query += "&";
+      query += "categorie=" + category.join("&categorie=");
     }
     return query;
   };
 
   //export to CSV
   const exportToCSV = () => {
-    const csvContent = 'data:text/csv;charset=utf-8,' + convertToCSV(data);
+    const csvContent = "data:text/csv;charset=utf-8," + convertToCSV(data);
     const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'smartphonedata.csv');
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "smartphonedata.csv");
     document.body.appendChild(link);
     link.click();
   };
 
   const convertToCSV = (data) => {
-    const header = Object.keys(data[0]).join(',');
-    const rows = data.map((item) => Object.values(item).join(','));
-    return [header, ...rows].join('\n');
+    const header = Object.keys(data[0]).join(",");
+    const rows = data.map((item) => Object.values(item).join(","));
+    return [header, ...rows].join("\n");
   };
 
   //import csv
@@ -114,11 +114,11 @@ export default function Tables() {
   };
 
   const parseCSV = (csvData) => {
-    const rows = csvData.split('\n');
-    const headers = rows[0].split(',');
+    const rows = csvData.split("\n");
+    const headers = rows[0].split(",");
     const parsedData = [];
     for (let i = 1; i < rows.length; i++) {
-      const values = rows[i].split(',');
+      const values = rows[i].split(",");
       if (values.length === headers.length) {
         const item = {};
         for (let j = 0; j < headers.length; j++) {
@@ -154,34 +154,34 @@ export default function Tables() {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: 'Marque',
-      dataIndex: 'brand',
-      key: 'brand',
-      filters: removeDuplicates(data, 'brand'),
+      title: "Marque",
+      dataIndex: "brand",
+      key: "brand",
+      filters: removeDuplicates(data, "brand"),
     },
     {
-      title: 'Modèle',
-      dataIndex: 'model',
-      key: 'model',
-      filters: removeDuplicates(data, 'model'),
+      title: "Modèle",
+      dataIndex: "model",
+      key: "model",
+      filters: removeDuplicates(data, "model"),
     },
     {
-      title: 'Catégorie',
-      dataIndex: 'category',
-      key: 'category',
-      filters: removeDuplicates(data, 'category'),
+      title: "Catégorie",
+      dataIndex: "category",
+      key: "category",
+      filters: removeDuplicates(data, "category"),
     },
     {
-      title: 'Prix',
-      dataIndex: 'price',
-      key: 'price',
+      title: "Prix",
+      dataIndex: "price",
+      key: "price",
       sorter: (a, b) => a.price - b.price,
       render: (price) => <>{price} €</>,
     },
     {
-      title: 'Ajouté le',
-      dataIndex: 'creation_date',
-      key: 'creation_date',
+      title: "Ajouté le",
+      dataIndex: "creation_date",
+      key: "creation_date",
       sorter: (a, b) => {
         const dateA = new Date(a.creation_date);
         const dateB = new Date(b.creation_date);
@@ -193,9 +193,9 @@ export default function Tables() {
       },
     },
     {
-      title: '',
-      dataIndex: 'voir',
-      key: 'voir',
+      title: "",
+      dataIndex: "voir",
+      key: "voir",
       render: (_, record) => (
         <NavLink to={`/smartphones/${record.id_phone}`}>
           <EyeOutlined />
@@ -238,11 +238,11 @@ export default function Tables() {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -251,19 +251,19 @@ export default function Tables() {
       brand: newData[0].brand,
       creation_date:
         new Date().getFullYear() +
-        '-' +
-        ('0' + (new Date().getMonth() + 1)).slice(-2) +
-        '-' +
-        ('0' + new Date().getDate()).slice(-2),
+        "-" +
+        ("0" + (new Date().getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + new Date().getDate()).slice(-2),
       model: newData[0].model,
-      thumbnail_1: '',
-      thumbnail_2: '',
-      thumbnail_3: '',
+      thumbnail_1: "",
+      thumbnail_2: "",
+      thumbnail_3: "",
       category: newData[0].category,
-      color: '',
+      color: "",
       has_charger: +newData[0].has_charger === 1 ? true : false,
       network: newData[0].network,
-      OS: '',
+      OS: "",
       price: +newData[0].price,
       RAM: +newData[0].RAM,
       screen: +newData[0].screen,
@@ -280,15 +280,15 @@ export default function Tables() {
 
   return (
     <>
-      <div className='rounded-lg shadow-md'>
+      <div className="rounded-lg shadow-md">
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: '#00ACB0',
-              colorTextHeading: '#002743',
-              colorText: '#00ACB0',
-              colorBorderSecondary: '#EBEBEB',
-              colorFillSecondary: '#EBEBEB',
+              colorPrimary: "#00ACB0",
+              colorTextHeading: "#002743",
+              colorText: "#00ACB0",
+              colorBorderSecondary: "#EBEBEB",
+              colorFillSecondary: "#EBEBEB",
               fontSize: 16,
             },
           }}
@@ -297,30 +297,30 @@ export default function Tables() {
             columns={columns}
             dataSource={data}
             pagination={{
-              position: ['bottomCenter'],
+              position: ["bottomCenter"],
               ...tableParams.pagination,
             }}
             loading={loading}
             onChange={handleTableChange}
             rowKey={(record) => record.id_phone}
-            tableLayout={isMobile ? 'auto' : 'fixed'}
+            tableLayout={isMobile ? "auto" : "fixed"}
           />
         </ConfigProvider>
       </div>
       <button
-        type='button'
-        className='connect-ghostButton'
+        type="button"
+        className="connect-ghostButton"
         onClick={exportToCSV}
       >
         Exporter le tableau en CSV
       </button>
-      <input type='file' accept='.csv' onChange={importCSV} />
+      <input type="file" accept=".csv" onChange={importCSV} />
       <button
-        type='button'
+        type="button"
         onClick={handleSendCsv}
-        className='connect-ghostButton'
+        className="connect-ghostButton"
       >
-        Envoyer dans la BDD
+        Importer dans le cataloque
       </button>
     </>
   );
