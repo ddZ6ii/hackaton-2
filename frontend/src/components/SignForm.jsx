@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useIdentification } from '../hooks/useIdentification';
+import { useAuthentication } from '../hooks/useAuthentication';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -8,8 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignForm() {
   const navigate = useNavigate();
-  const { isLoggedIn, isAdmin, setIsLoggedIn, setIsAdmin } =
-    useIdentification();
+  const { handleLogin, setIsAdmin } = useAuthentication();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +39,7 @@ export default function SignForm() {
           theme: 'dark',
         });
         // get user info and update context (authentication token is saved as a cookie)
-        setIsLoggedIn(true);
+        handleLogin(true);
         setIsAdmin(res.data.is_admin);
         // page redirection
         navigate('/accueil');
