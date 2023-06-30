@@ -12,6 +12,7 @@ export default function Tables() {
    * States
    */
   const [data, setData] = useState<DataType[]>([]);
+  const [newData, setNewData] = useState({});
   const [loading, setLoading] = useState(false);
   const [currentFilters, setCurrentFilters] = useState("");
   const [tableParams, setTableParams] = useState<TableParams>({
@@ -94,6 +95,37 @@ export default function Tables() {
     const header = Object.keys(data[0]).join(",");
     const rows = data.map((item) => Object.values(item).join(","));
     return [header, ...rows].join("\n");
+  };
+
+  //import csv
+  const importCSV = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = handleFileLoad;
+    reader.readAsText(file);
+  };
+
+  const handleFileLoad = (event) => {
+    const csvData = event.target.result;
+    const parsedData = parseCSV(csvData);
+    setNewData(parsedData);
+  };
+
+  const parseCSV = (csvData) => {
+    const rows = csvData.split("\n");
+    const headers = rows[0].split(",");
+    const parsedData = [];
+    for (let i = 1; i < rows.length; i++) {
+      const values = rows[i].split(",");
+      if (values.length === headers.length) {
+        const item = {};
+        for (let j = 0; j < headers.length; j++) {
+          item[headers[j]] = values[j];
+        }
+        parsedData.push(item);
+      }
+    }
+    return parsedData;
   };
 
   const fetchData = (url) => {
@@ -212,6 +244,36 @@ export default function Tables() {
     };
   }, []);
 
+  const handleSendCsv = () => {
+    const formatedCsv = {
+      brand: newData[0].brand,
+      creation_date:
+        new Date().getFullYear() +
+        "-" +
+        ("0" + (new Date().getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + new Date().getDate()).slice(-2),
+      model: newData[0].model,
+      thumbnail_1: "",
+      thumbnail_2: "",
+      thumbnail_3: "",
+      category: newData[0].category,
+      color: "",
+      has_charger: +newData[0].has_charger === 1 ? true : false,
+      network: newData[0].network,
+      OS: "",
+      price: +newData[0].price,
+      RAM: +newData[0].RAM,
+      screen: +newData[0].screen,
+      state: newData[0].state,
+      storage: +newData[0].storage,
+    };
+    axios
+      .post("http://localhost:5000/smartphones", formatedCsv)
+      .then((res) => fetchData(`${API}`))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <>
       <div className="rounded-lg shadow-md">
@@ -247,6 +309,14 @@ export default function Tables() {
         onClick={exportToCSV}
       >
         Exporter le tableau en CSV
+      </button>
+      <input type="file" accept=".csv" onChange={importCSV} />
+      <button
+        type="button"
+        onClick={handleSendCsv}
+        className="connect-ghostButton"
+      >
+        Envoyer dans la BDD
       </button>
     </>
   );
