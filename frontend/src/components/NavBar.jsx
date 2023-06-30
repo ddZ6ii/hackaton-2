@@ -23,32 +23,32 @@ export default function NavBar() {
           <img src='../assets/icons/logo2.svg' alt='emmaus-connect' />
         </NavLink>
 
-        {isLoggedIn && (
-          <div className='hidden items-center text-base md:flex'>
-            <NavLink to='accueil' className='mr-5 hover:text-primary'>
-              Accueil
-            </NavLink>
-            <NavLink to='faq' className='mr-5 hover:text-primary'>
-              FAQ
-            </NavLink>
-            <NavLink to='account'>
-              <button className='inline-flex items-center rounded border-0 bg-primary px-3 py-1 text-sm text-neutralLight hover:bg-primary/75 focus:outline-none md:mt-0'>
-                Se connecter
-                <svg
-                  fill='none'
-                  stroke='currentColor'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  className='ml-1 h-4 w-4'
-                  viewBox='0 0 24 24'
-                >
-                  <path d='M5 12h14M12 5l7 7-7 7'></path>
-                </svg>
-              </button>
-            </NavLink>
-          </div>
-        )}
+        {/* {isLoggedIn && ( */}
+        <div className='hidden items-center text-base md:flex'>
+          <NavLink to='accueil' className='mr-5 hover:text-primary'>
+            Accueil
+          </NavLink>
+          <NavLink to='faq' className='mr-5 hover:text-primary'>
+            FAQ
+          </NavLink>
+          <NavLink to='account'>
+            <button className='inline-flex items-center rounded border-0 bg-primary px-3 py-1 text-sm text-neutralLight hover:bg-primary/75 focus:outline-none md:mt-0'>
+              Se connecter
+              <svg
+                fill='none'
+                stroke='currentColor'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                className='ml-1 h-4 w-4'
+                viewBox='0 0 24 24'
+              >
+                <path d='M5 12h14M12 5l7 7-7 7'></path>
+              </svg>
+            </button>
+          </NavLink>
+        </div>
+        {/* )} */}
       </nav>
 
       <nav>
