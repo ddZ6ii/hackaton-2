@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import { useIdentification } from '../../hooks/useIdentification';
+import { useAuthentication } from '../../hooks/useAuthentication';
 
 import '../../app.css';
 
 export default function NavBar() {
   const navigate = useNavigate();
   const [active, setActive] = useState('');
-  const { isLoggedIn, setIsLoggedIn } = useIdentification();
+  const { isLoggedIn, setIsLoggedIn, handleLogin } = useAuthentication();
 
   const API = `${import.meta.env.VITE_BACKEND_URL}/logout`;
 
@@ -23,7 +23,7 @@ export default function NavBar() {
 
   const handleDisconnect = () => {
     //update userContext
-    setIsLoggedIn(false);
+    handleLogin(false);
     // handle logout (remove jwt from cookie)
     axios
       .get(API, { withCredentials: true })
@@ -34,6 +34,12 @@ export default function NavBar() {
     // page redirection
     navigate('compte');
   };
+
+  // check local storage if user is still logged in (after page refresh)
+  useEffect(() => {
+    const isUserLoggedIn = localStorage.getItem('isUserCurrentlyLoggedIn');
+    if (JSON.parse(isUserLoggedIn) === true) setIsLoggedIn(true);
+  }, []);
 
   return (
     <header className='fixed z-20 w-full bg-white md:sticky'>
@@ -73,28 +79,28 @@ export default function NavBar() {
 
       {isLoggedIn && (
         <nav>
-          <label className="burger absolute right-5 top-[25%] z-10 flex md:hidden">
+          <label className='burger absolute right-5 top-[25%] z-10 flex md:hidden'>
             <input
-              type="checkbox"
+              type='checkbox'
               onChange={handleClick}
-              checked={active === "active"}
+              checked={active === 'active'}
             />
-            <span className="burgerline">{}</span>
-            <span className="burgerline">{}</span>
-            <span className="burgerline">{}</span>
+            <span className='burgerline'>{}</span>
+            <span className='burgerline'>{}</span>
+            <span className='burgerline'>{}</span>
           </label>
           <div
             className={`menu absolute right-0 top-[0px] z-20 flex w-[140px] translate-y-[-150%] flex-col rounded-bl-md py-20 md:hidden ${active} items-center gap-5 bg-primary`}
           >
             <NavLink
-              to="accueil"
+              to='accueil'
               onClick={handleClickLink}
               className={`text-center text-neutralLight`}
             >
               Accueil
             </NavLink>
             <NavLink
-              to="faq"
+              to='faq'
               onClick={handleClickLink}
               className={`text-center text-neutralLight`}
             >

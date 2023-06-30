@@ -1,6 +1,6 @@
 import '../App.css';
 
-const RowQuestion = ({ faq, index, toggleFAQ }) => {
+export default function RowQuestion({ faq, index, toggleFAQ }) {
   return (
     <div
       className={'faq ' + (faq.open ? 'open' : '')}
@@ -13,6 +13,4 @@ const RowQuestion = ({ faq, index, toggleFAQ }) => {
       </div>
     </div>
   );
-};
-
-export default RowQuestion;
+}
