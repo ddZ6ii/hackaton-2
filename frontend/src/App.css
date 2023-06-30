@@ -7,15 +7,15 @@
 \* ______________________________________________________________________ */
 
 @font-face {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 600;
-  src: url("../assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+  src: url('../assets/fonts/Poppins-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 300;
-  src: url("../assets/fonts/Poppins-Light.ttf") format("truetype");
+  src: url('../assets/fonts/Poppins-Light.ttf') format('truetype');
 }
 
 /* ______________________________________________________________________ *\
@@ -24,9 +24,9 @@
 
 @layer base {
   body {
-    color: theme("colors.default");
-    font-family: theme("fontFamily.sans");
-    font-size: theme("fontSize.sm");
+    color: theme('colors.default');
+    font-family: theme('fontFamily.sans');
+    font-size: theme('fontSize.sm');
   }
 
   section {
@@ -40,46 +40,46 @@
     flex-direction: column;
     gap: 32px;
 
-    @media screen and (min-width: theme("screens.md")) {
+    @media screen and (min-width: theme('screens.md')) {
       padding-top: 32px;
     }
 
-    @media screen and (min-width: theme("screens.xl")) {
+    @media screen and (min-width: theme('screens.xl')) {
       margin-inline: clamp(192px, 7.5vw, 288px);
     }
 
-    @media screen and (min-width: theme("screens.2xl")) {
+    @media screen and (min-width: theme('screens.2xl')) {
       margin-inline: clamp(288px, 20vw, 576px);
     }
   }
 
   h1 {
-    font-size: theme("fontSize.2xl");
-    font-family: theme("fontFamily.sans");
+    font-size: theme('fontSize.2xl');
+    font-family: theme('fontFamily.sans');
     font-weight: 600;
   }
 
   h2 {
-    font-size: theme("fontSize.xl");
-    font-family: theme("fontFamily.sans");
+    font-size: theme('fontSize.xl');
+    font-family: theme('fontFamily.sans');
     font-weight: 600;
   }
 
   h3 {
-    font-size: theme("fontSize.lg");
-    font-family: theme("fontFamily.sans");
+    font-size: theme('fontSize.lg');
+    font-family: theme('fontFamily.sans');
     font-weight: 600;
   }
 
   h4 {
-    font-size: theme("fontSize.base");
-    font-family: theme("fontFamily.sans");
+    font-size: theme('fontSize.base');
+    font-family: theme('fontFamily.sans');
     font-weight: 600;
   }
 
   p {
-    font-size: theme("fontSize.sm");
-    font-family: theme("fontFamily.sans");
+    font-size: theme('fontSize.sm');
+    font-family: theme('fontFamily.sans');
   }
 }
 
@@ -124,12 +124,12 @@
   }
 
   .connect-ghostButton {
-    font-family: theme("fontFamily.sans");
-    font-size: theme("fontSize.base");
+    font-family: theme('fontFamily.sans');
+    font-size: theme('fontSize.base');
     border-radius: 25px;
     padding: 12px 45px;
-    background: theme("colors.secondary");
-    color: theme("colors.neutralLight");
+    background: theme('colors.secondary');
+    color: theme('colors.neutralLight');
     &:hover {
       background-color: rgba(230, 36, 96, 0.8);
     }
@@ -147,7 +147,7 @@
   }
 
   .overlay {
-    background: theme("colors.primary");
+    background: theme('colors.primary');
     background: -webkit-linear-gradient(to bottom, #fff, #ffff, #00acb0);
     background: linear-gradient(to bottom, #fff, #fff, #00acb0);
     background-repeat: no-repeat;
@@ -198,7 +198,7 @@
   .faqs .faq {
     margin: 25px;
     padding: 25px;
-    background: theme("colors.primary");
+    background: theme('colors.primary');
     color: #fff;
     border-radius: 10px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
@@ -212,7 +212,7 @@
   }
 
   .faqs .faq .faq-question::after {
-    content: "+";
+    content: '+';
     position: absolute;
     top: 50%;
     right: 0px;
@@ -234,7 +234,7 @@
   }
 
   .faqs .faq.open .faq-question::after {
-    content: "-";
+    content: '-';
   }
 
   .faqs .faq.open .faq-answer {
@@ -254,7 +254,7 @@
   }
 
   nav label span {
-    background: theme("colors.default");
+    background: theme('colors.neutralDark');
     border-radius: 10px;
     height: 7px;
     margin: 4px 0;
@@ -273,23 +273,26 @@
     width: 75%;
   }
 
-  nav input[type="checkbox"] {
+  nav input[type='checkbox'] {
     display: none;
   }
 
-  nav input[type="checkbox"]:checked ~ span:nth-of-type(1) {
+  nav input[type='checkbox']:checked ~ span:nth-of-type(1) {
     transform-origin: bottom;
     transform: rotatez(45deg) translate(6px, 0px);
+    background: theme('colors.neutralLight');
   }
 
-  nav input[type="checkbox"]:checked ~ span:nth-of-type(2) {
+  nav input[type='checkbox']:checked ~ span:nth-of-type(2) {
     transform-origin: top;
     transform: rotatez(-45deg);
+    background: theme('colors.neutralLight');
   }
 
-  nav input[type="checkbox"]:checked ~ span:nth-of-type(3) {
+  nav input[type='checkbox']:checked ~ span:nth-of-type(3) {
     transform-origin: bottom;
     width: 50%;
+    background: theme('colors.neutralLight');
     transform: translate(18px, -9px) rotatez(45deg);
   }
 
@@ -304,5 +307,5 @@
 }
 
 .ant-table-filter-dropdown-btns button:nth-of-type(2) {
-  background: theme("colors.primary");
+  background: theme('colors.primary');
 }

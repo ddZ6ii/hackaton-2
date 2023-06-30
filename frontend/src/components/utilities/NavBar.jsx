@@ -1,55 +1,72 @@
-import { NavLink } from "react-router-dom";
-import { useIdentification } from "../../hooks/useIdentification";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { useIdentification } from '../../hooks/useIdentification';
 
-import "../../app.css";
-import { useState } from "react";
+import '../../app.css';
 
 export default function NavBar() {
-  const [active, setActive] = useState("");
+  const navigate = useNavigate();
+  const [active, setActive] = useState('');
   const { isLoggedIn, setIsLoggedIn } = useIdentification();
 
+  const API = `${import.meta.env.VITE_BACKEND_URL}/logout`;
+
   const handleClick = () => {
-    setActive(active === "" ? "active" : "");
+    setActive(active === '' ? 'active' : '');
   };
 
   const handleClickLink = () => {
-    setActive("");
+    setActive('');
+  };
+
+  const handleDisconnect = () => {
+    //update userContext
+    setIsLoggedIn(false);
+    // handle logout (remove jwt from cookie)
+    axios
+      .get(API, { withCredentials: true })
+      .then((res) => {
+        console.warn(res.data.message);
+      })
+      .catch((err) => console.error(err.response.data.message));
+    // page redirection
+    navigate('compte');
   };
 
   return (
-    <header className="fixed z-20 w-full bg-white md:sticky">
-      <nav className="flex w-full flex-col flex-wrap justify-between px-8 py-3 shadow md:flex-row md:items-center">
-        <NavLink to="/" className="flex md:mb-0 md:items-center">
-          <img src="../assets/icons/logo2.svg" alt="emmaus-connect" />
+    <header className='fixed z-20 w-full bg-white md:sticky'>
+      <nav className='flex w-full flex-col flex-wrap justify-between px-8 py-3 shadow md:flex-row md:items-center'>
+        <NavLink to='/' className='flex md:mb-0 md:items-center'>
+          <img src='../assets/icons/logo2.svg' alt='emmaus-connect' />
         </NavLink>
 
         {isLoggedIn && (
-          <div className="hidden items-center text-base md:flex">
-            <NavLink to="accueil" className="mr-5 hover:text-primary">
+          <div className='hidden items-center text-base md:flex'>
+            <NavLink to='accueil' className='mr-5 hover:text-primary'>
               Accueil
             </NavLink>
-            <NavLink to="faq" className="mr-5 hover:text-primary">
+            <NavLink to='faq' className='mr-5 hover:text-primary'>
               FAQ
             </NavLink>
-            <NavLink to="/">
-              <button
-                className="inline-flex items-center rounded border-0 bg-primary px-3 py-1 text-sm text-neutralLight hover:bg-primary/75 focus:outline-none md:mt-0"
-                onClick={() => setIsLoggedIn(false)}
+            <button
+              className='inline-flex items-center rounded border-0 bg-primary px-3 py-1 text-sm text-neutralLight hover:bg-primary/75 focus:outline-none md:mt-0'
+              onClick={handleDisconnect}
+            >
+              Se déconnecter
+              <svg
+                fill='none'
+                stroke='currentColor'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                className='ml-1 h-4 w-4'
+                viewBox='0 0 24 24'
               >
-                Se déconnecter
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="ml-1 h-4 w-4"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </button>
-            </NavLink>
+                <path d='M5 12h14M12 5l7 7-7 7'></path>
+              </svg>
+            </button>
           </div>
         )}
       </nav>
@@ -83,13 +100,13 @@ export default function NavBar() {
             >
               FAQ
             </NavLink>
-            <NavLink
-              to="compte"
-              onClick={handleClickLink}
+            <button
+              type='button'
               className={`text-center text-neutralLight`}
+              onClick={handleDisconnect}
             >
               Se déconnecter
-            </NavLink>
+            </button>
           </div>
         </nav>
       )}

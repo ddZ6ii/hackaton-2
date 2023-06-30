@@ -20,22 +20,29 @@ const router = express.Router();
 const upload = multer({ dest: './public/uploads/' });
 
 /**
- * ROUTING
+ * USER ROUTING
  */
-// login
 router.post('/login', getUserByEmailWithPasswordAndPassToNext, verifyPassword);
+router.get('/logout', userController.logoutUser);
 
 // authentication wall : verifyToken is activated for each route after this line
-// router.use(verifyToken);
-router.get("/smartphones", phoneController.getPhones);
-router.get("/smartphones/:id", phoneController.getPhone);
-// router.post("/smartphones", validatePhone, phoneController.postPhone);
-// validatePhone require color/OS ?!
-router.post("/smartphones", phoneController.postPhone);
-router.delete("/smartphones/:id", phoneController.deletePhone);
+router.use(verifyToken);
 
+/**
+ * PHONE ROUTING
+ */
+router.get('/smartphones', phoneController.getPhones);
+router.get('/smartphones/:id', phoneController.getPhone);
+// route below not passing validation (require color/OS ?!)
+// router.post("/smartphones", validatePhone, phoneController.postPhone);
+router.post('/smartphones', phoneController.postPhone);
+router.delete('/smartphones/:id', phoneController.deletePhone);
+
+/**
+ * FILE UPLOAD ROUTING
+ */
 // route for uploading 1 or multiple files
-router.post("/upload_files", upload.array("files"), (req, res) => {
+router.post('/upload_files', upload.array('files'), (req, res) => {
   if (!req?.files.length)
     return res.status(400).send('bad request: empty body');
 
@@ -54,7 +61,9 @@ router.post("/upload_files", upload.array("files"), (req, res) => {
   res.json({ message: 'tous les fichiers ont correctement ete recupere!' });
 });
 
-// routes for administration
+/**
+ * ADMIN ROUTING
+ */
 router.get('/users', userController.getAllUsers);
 router.post(
   '/users',
