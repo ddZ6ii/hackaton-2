@@ -10,21 +10,25 @@ import NotFound from "./pages/NotFound";
 import PhoneDetails from "./pages/PhoneDetails";
 
 // Components
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import NavBar from "./components/utilities/NavBar";
+import Footer from "./components/utilities/Footer";
 
 export default function App() {
-  // const { isLoggedIn } = useIdentification();
+  const { isLoggedIn } = useIdentification();
   return (
     <>
       <NavBar />
       <main className="min-h-[calc(100dvh-45px)] pt-24 md:min-h-[calc(100vh-134px)] md:pt-0">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/accueil" element={<Accueil />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/phones/:id" element={<PhoneDetails />} />
+          {isLoggedIn && (
+            <>
+              <Route path="/accueil" element={<Accueil />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/smartphones/:id" element={<PhoneDetails />} />
+            </>
+          )}
+          <Route path="/compte" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
