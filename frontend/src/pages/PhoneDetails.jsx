@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import { RxDotFilled } from "react-icons/rx";
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import { RxDotFilled } from 'react-icons/rx';
 
-import styles from "../css/PhoneDetails.module.css";
+import styles from '../css/PhoneDetails.module.css';
 
 export default function PhoneDetails() {
   const [phone, setPhone] = useState({});
@@ -14,7 +14,9 @@ export default function PhoneDetails() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/smartphones/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/smartphones/${id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setPhone(res.data);
       });
@@ -42,7 +44,7 @@ export default function PhoneDetails() {
     }
   }, [phone]);
 
-  const imagePath = "../public/assets/image/";
+  const imagePath = '../public/assets/image/';
 
   const slides = [
     `${imagePath}${phone.thumbnail_1}`,
@@ -55,18 +57,18 @@ export default function PhoneDetails() {
       className={`${styles.phone_details_container} items-center justify-center sm:flex sm:flex-row`}
     >
       <div>
-        <h2 className="mb-4 mt-12 text-center">
+        <h2 className='mb-4 mt-12 text-center'>
           {phone.brand} {phone.model}
         </h2>
-        <div className="features flex justify-around">
-          <div className="flex flex-col">
+        <div className='features flex justify-around'>
+          <div className='flex flex-col'>
             <h3>Caractéristiques techniques</h3>
-            <p className="mb-4">Marque : {phone.brand} </p>
-            <p className="mb-4">Modèle : {phone.model} </p>
-            <p className="mb-4">Taille d'écran : {phone.screen} pouces </p>
-            <p className="mb-4">Taile de la RAM : {phone.RAM} Go </p>
-            <p className="mb-4">
-              Taille de l'espace de stockage : {phone.storage} Go{" "}
+            <p className='mb-4'>Marque : {phone.brand} </p>
+            <p className='mb-4'>Modèle : {phone.model} </p>
+            <p className='mb-4'>Taille d'écran : {phone.screen} pouces </p>
+            <p className='mb-4'>Taile de la RAM : {phone.RAM} Go </p>
+            <p className='mb-4'>
+              Taille de l'espace de stockage : {phone.storage} Go{' '}
             </p>
             <p> Système d'exploitation : {phone.OS} </p>
           </div>
@@ -75,7 +77,7 @@ export default function PhoneDetails() {
       <div
         className={`group relative mt-8 flex w-1/2 flex-col items-center justify-center`}
       >
-        <img src={slides[currentIndex]} className="h-96 rounded-xl" />
+        <img src={slides[currentIndex]} className='h-96 rounded-xl' />
         <div
           className={`${styles.chevron_icon} absolute left-2 top-[50%] -translate-x-0 -translate-y-1/2 cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block`}
         >
@@ -86,13 +88,13 @@ export default function PhoneDetails() {
         >
           <BsChevronCompactRight onClick={nextSlide} size={30} />
         </div>
-        <div className="top-4 flex justify-center py-2">
+        <div className='top-4 flex justify-center py-2'>
           {slides.map((slide, slideIndex) => (
             <div
               key={slideIndex}
               onClick={() => goToSlide(slideIndex)}
               className={`cursor-pointer text-2xl ${
-                slideIndex === currentIndex ? "text-primary" : ""
+                slideIndex === currentIndex ? 'text-primary' : ''
               }`}
             >
               <RxDotFilled />
