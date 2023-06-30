@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 export default function NotFound() {
   const navigate = useNavigate();
   return (
-    <section className="min-h-screen justify-center">
-      <div className="flex flex-row items-center gap-6">
+    <section className="min-h-screen justify-start text-default">
+      <div className="flex flex-col items-center gap-6 md:flex-row">
         <img
           className="rounded-xl md:h-80"
           src="../../public/assets/image/broken-phone.webp"
           alt="error_404"
         />
         <div className="not-found-text">
-          <p className="text-lg font-extrabold text-neutralDark dark:text-neutralLight md:text-2xl">
+          <p className="text-lg font-extrabold md:text-2xl">
             La page que vous recherchez n'a pu être trouvée
           </p>
           <p>
