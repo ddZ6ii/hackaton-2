@@ -25,10 +25,10 @@ export default function App() {
             <>
               <Route path="/accueil" element={<Accueil />} />
               <Route path="/faq" element={<Faq />} />
-              <Route path="/phones/:id" element={<PhoneDetails />} />
+              <Route path="/smartphones/:id" element={<PhoneDetails />} />
             </>
           )}
-          <Route path="/account" element={<Account />} />
+          <Route path="/compte" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
